@@ -1,0 +1,13 @@
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "WaveData", menuName = "Game/WaveData")]
+public class WaveData : ScriptableObject
+{
+    [Header("Enemy")]
+    public EnemyBase enemyPrefab;
+
+    [Header("Wave Settings")]
+    public int totalEnemies = 20;
+    public int batchSize = 3;
+    public float spawnInterval = 2f;
+}

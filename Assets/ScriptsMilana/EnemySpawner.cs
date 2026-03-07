@@ -37,10 +37,15 @@ public class EnemySpawner : MonoBehaviour
     private void SpawnEnemy()
     {
         Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        
+        Vector3 offset = Random.insideUnitSphere * 3f;
+        offset.y = 0;
+
+        Vector3 spawnPos = spawnPoint.position + offset;
 
         EnemyBase enemy = Instantiate(
             wave.enemyPrefab,
-            spawnPoint.position,
+            spawnPos,
             Quaternion.identity
         );
 

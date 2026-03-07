@@ -4,6 +4,7 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     private static readonly List<EnemyBase> enemies = new();
+    public static IReadOnlyList<EnemyBase> Enemies => enemies;
 
     public static void Register(EnemyBase enemy)
     {

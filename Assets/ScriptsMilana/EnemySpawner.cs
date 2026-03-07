@@ -9,10 +9,21 @@ public class EnemySpawner : MonoBehaviour
 
     private int enemiesSpawned;
     private int enemiesAlive;
+    
+    public static event System.Action OnWaveCompleted;
 
     private void Start()
     {
         StartCoroutine(SpawnRoutine());
+    }
+    private void OnEnable()
+    {
+        EnemyBase.OnEnemyKilled += HandleEnemyKilled;
+    }
+
+    private void OnDisable()
+    {
+        EnemyBase.OnEnemyKilled -= HandleEnemyKilled;
     }
 
     private IEnumerator SpawnRoutine()
@@ -42,9 +53,12 @@ public class EnemySpawner : MonoBehaviour
         offset.y = 0;
 
         Vector3 spawnPos = spawnPoint.position + offset;
+        
+        EnemyBase prefab =
+            wave.enemyPrefabs[Random.Range(0, wave.enemyPrefabs.Length)];
 
         EnemyBase enemy = Instantiate(
-            wave.enemyPrefab,
+            prefab,
             spawnPos,
             Quaternion.identity
         );
@@ -53,5 +67,16 @@ public class EnemySpawner : MonoBehaviour
 
         enemiesSpawned++;
         enemiesAlive++;
+    }
+    private void HandleEnemyKilled(EnemyBase enemy) // tracks how many enemies are alive
+    {
+        enemiesAlive--;
+
+        if (enemiesAlive == 0 && enemiesSpawned == wave.totalEnemies) // once all enemies die, wave completed event fires
+        {
+            Debug.Log("Wave Complete!");
+            OnWaveCompleted?.Invoke();
+        }
+        
     }
 }

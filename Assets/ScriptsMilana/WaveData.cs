@@ -4,7 +4,7 @@ using UnityEngine;
 public class WaveData : ScriptableObject
 {
     [Header("Enemy")]
-    public EnemyBase enemyPrefab;
+    public EnemyBase[] enemyPrefabs;
 
     [Header("Wave Settings")]
     public int totalEnemies = 20;

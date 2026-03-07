@@ -12,6 +12,8 @@ public class EnemyBase : MonoBehaviour
 
     private float _fireTimer;
     private float _stoppingDistanceSqr;
+    
+    public static event System.Action<EnemyBase> OnEnemyKilled; // event
 
     private void Awake()
     {
@@ -151,5 +153,10 @@ public class EnemyBase : MonoBehaviour
                 enemy.transform.position -= pushDir * pushAmount;
             }
         }
+    }
+    public void Die()
+    {
+        OnEnemyKilled?.Invoke(this);
+        gameObject.SetActive(false);
     }
 }

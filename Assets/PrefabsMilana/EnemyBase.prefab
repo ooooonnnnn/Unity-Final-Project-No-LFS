@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3418268431584215095}
   - component: {fileID: 5839617326597963008}
   - component: {fileID: 8520818316116910619}
+  - component: {fileID: -3834119316503094813}
   m_Layer: 0
   m_Name: EnemyBase
   m_TagString: Untagged
@@ -130,7 +131,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBase
   data: {fileID: 11400000, guid: 9955918c32424684a91963c146859235, type: 2}
   firePoint: {fileID: 6931553641183035368}
-  target: {fileID: 0}
+  agent: {fileID: -3834119316503094813}
+--- !u!195 &-3834119316503094813
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8477810394355442602}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 20
+  avoidancePriority: 50
+  m_AngularSpeed: 720
+  m_StoppingDistance: 8
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &9019235314706636387
 GameObject:
   m_ObjectHideFlags: 0

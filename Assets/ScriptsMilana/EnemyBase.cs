@@ -1,24 +1,25 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyBase : MonoBehaviour
 {
     [SerializeField] private EnemyData data;
     [SerializeField] private Transform firePoint;
-    [SerializeField] private float separationRadius = 2f;
-    [SerializeField] private float separationStrength = 4f;
+    [SerializeField] private NavMeshAgent agent;
+    private Transform target;
 
-    [SerializeField] Transform target;
-    private Transform _transform;
-
-    private float _fireTimer;
-    private float _stoppingDistanceSqr;
     
-    public static event System.Action<EnemyBase> OnEnemyKilled; // event
+    private float fireTimer;
+
+    public static event System.Action<EnemyBase> OnEnemyKilled;
 
     private void Awake()
     {
-        _transform = transform;
-        _stoppingDistanceSqr = data.stoppingDistance * data.stoppingDistance;
+        agent.speed = data.moveSpeed;
+        agent.stoppingDistance = data.stoppingDistance;
+
+        
+        agent.avoidancePriority = Random.Range(40, 90);
     }
 
     private void OnEnable()
@@ -36,64 +37,50 @@ public class EnemyBase : MonoBehaviour
         target = playerTarget;
     }
 
-    public void Tick(float deltaTime)
+    public void Tick(float dt)
     {
         if (!target) return;
 
-        Vector3 enemyPos = _transform.position;
-        Vector3 targetPos = target.position;
+        float distance = Vector3.Distance(transform.position, target.position);
 
-        Vector3 toTarget = targetPos - enemyPos;
-        float sqrDistance = toTarget.sqrMagnitude;
-
-        Vector3 separation = CalculateSeparation();
-
-        if (sqrDistance > _stoppingDistanceSqr)
+        if (distance > data.stoppingDistance)
         {
-            Move(toTarget, separation, deltaTime);
+            ChasePlayer();
         }
         else
         {
-            ApplySeparation(separation, deltaTime);
-            Attack(targetPos, deltaTime);
+            Attack(target.position, dt);
         }
-
-        EnforceMinimumDistance(); 
     }
 
-    private void Move(Vector3 toTarget, Vector3 separation, float dt)
+    private void ChasePlayer()
     {
-        Vector3 targetDir = toTarget.normalized;
+        agent.isStopped = false;
 
-        Vector3 finalDir = (targetDir + separation).normalized;
+        
+        Vector3 offset = Random.insideUnitSphere * 1.5f;
+        offset.y = 0;
 
-        _transform.position += finalDir * (data.moveSpeed * dt);
-
-        if (finalDir != Vector3.zero)
-            _transform.forward = finalDir;
+        agent.SetDestination(target.position + offset);
     }
 
     private void Attack(Vector3 targetPos, float dt)
     {
-        Vector3 lookDir = (targetPos - _transform.position).normalized;
-        lookDir.y = 0;
-        _transform.forward = lookDir;
-        _fireTimer += dt;
+        agent.isStopped = true;
 
-        if (_fireTimer < data.fireRate)
+        Vector3 lookDir = (targetPos - transform.position).normalized;
+        lookDir.y = 0;
+        transform.forward = lookDir;
+
+        fireTimer += dt;
+
+        if (fireTimer < data.fireRate)
             return;
 
-        _fireTimer = 0f;
+        fireTimer = 0f;
         Shoot(targetPos);
     }
-    private void ApplySeparation(Vector3 separation, float dt)
-    {
-        if (separation == Vector3.zero)
-            return;
 
-        _transform.position += separation * dt;
-    }
-    
     private void Shoot(Vector3 targetPos)
     {
         Projectile proj = ProjectilePool.Instance.Get();
@@ -109,51 +96,7 @@ public class EnemyBase : MonoBehaviour
             data.projectileDamage
         );
     }
-    private Vector3 CalculateSeparation()
-    {
-        Vector3 force = Vector3.zero;
 
-        foreach (var enemy in EnemyManager.Enemies)
-        {
-            if (enemy == this) continue;
-
-            Vector3 diff = _transform.position - enemy.transform.position;
-            float dist = diff.magnitude;
-
-            if (dist < separationRadius && dist > 0.01f)
-            {
-                float strength = (separationRadius - dist) / separationRadius;
-                force += diff.normalized * strength;
-            }
-        }
-
-        return force * separationStrength;
-    }
-    
-    private void EnforceMinimumDistance()
-    {
-        float minDist = separationRadius * 0.6f;   
-        float minDistSqr = minDist * minDist;
-
-        foreach (var enemy in EnemyManager.Enemies)
-        {
-            if (enemy == this) continue;
-
-            Vector3 diff = _transform.position - enemy.transform.position;
-            float distSqr = diff.sqrMagnitude;
-
-            if (distSqr < minDistSqr && distSqr > 0.0001f)
-            {
-                float dist = Mathf.Sqrt(distSqr);
-                Vector3 pushDir = diff / dist;
-
-                float pushAmount = (minDist - dist) * 0.5f;
-
-                _transform.position += pushDir * pushAmount;
-                enemy.transform.position -= pushDir * pushAmount;
-            }
-        }
-    }
     public void Die()
     {
         OnEnemyKilled?.Invoke(this);

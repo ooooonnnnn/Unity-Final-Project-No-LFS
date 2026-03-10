@@ -211,11 +211,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d66b4242955394746b539ff2d45a85a0, type: 3}
---- !u!4 &366746497 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2544436432532226568, guid: ef3a7e73301b7c94aa71f118007d101f, type: 3}
-  m_PrefabInstance: {fileID: 6926518867469009519}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &431534582
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -572,6 +567,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 106ba42ced282904e8954ca71f733bb6, type: 3}
+--- !u!4 &620134392 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2471444481993707896, guid: bf93d3fad20b4424098bf36bddb0152e, type: 3}
+  m_PrefabInstance: {fileID: 1611224669}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &633985572
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -883,7 +883,7 @@ MonoBehaviour:
   - {fileID: 1335415081}
   - {fileID: 2062776979}
   - {fileID: 456074275}
-  playerTarget: {fileID: 366746497}
+  playerTarget: {fileID: 620134392}
 --- !u!4 &1261164820
 Transform:
   m_ObjectHideFlags: 0
@@ -1685,6 +1685,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DummyPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 2908561807449681547, guid: ef3a7e73301b7c94aa71f118007d101f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6275037817687120362, guid: ef3a7e73301b7c94aa71f118007d101f, type: 3}
     m_RemovedGameObjects: []
@@ -1702,6 +1706,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 89449855271918401, guid: d63261e85f8254846bbbfb51b93911d7, type: 3}
+      propertyPath: poolSize
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 2160060055377736753, guid: d63261e85f8254846bbbfb51b93911d7, type: 3}
       propertyPath: m_Name
       value: ProjectilePool

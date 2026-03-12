@@ -1,105 +1,117 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyBase : MonoBehaviour
+namespace ScriptsMilana
 {
-    [SerializeField] private EnemyData data;
-    [SerializeField] private Transform firePoint;
-    [SerializeField] private NavMeshAgent agent;
-    private Transform target;
+    public class EnemyBase : MonoBehaviour
+    {
+        [SerializeField] private EnemyData data;
+        [SerializeField] private Transform firePoint;
+        [SerializeField] private NavMeshAgent agent;
+        private Transform target;
+        private Transform enemyTransform;
 
     
-    private float fireTimer;
+        private float fireTimer;
+        private float pathUpdateTimer;
 
-    public static event System.Action<EnemyBase> OnEnemyKilled;
+        public static event System.Action<EnemyBase> OnEnemyKilled;
 
-    private void Awake()
-    {
-        agent.speed = data.moveSpeed;
-        agent.stoppingDistance = data.stoppingDistance;
+        private void Awake()
+        {
+            enemyTransform = transform;
+            agent.speed = data.moveSpeed;
+            agent.stoppingDistance = data.stoppingDistance;
 
         
-        agent.avoidancePriority = Random.Range(40, 90);
-    }
-
-    private void OnEnable()
-    {
-        EnemyManager.Register(this);
-    }
-
-    private void OnDisable()
-    {
-        EnemyManager.Unregister(this);
-    }
-
-    public void Initialize(Transform playerTarget)
-    {
-        target = playerTarget;
-    }
-
-    public void Tick(float dt)
-    {
-        if (!target) return;
-
-        float distance = Vector3.Distance(transform.position, target.position);
-
-        if (distance > data.stoppingDistance)
-        {
-            ChasePlayer();
+            agent.avoidancePriority = Random.Range(40, 90);
         }
-        else
+
+        private void OnEnable()
         {
-            Attack(target.position, dt);
+            EnemyManager.Register(this);
         }
-    }
 
-    private void ChasePlayer()
-    {
-        agent.isStopped = false;
+        private void OnDisable()
+        {
+            EnemyManager.Unregister(this);
+        }
 
-        
-        Vector3 offset = Random.insideUnitSphere * 1.5f;
-        offset.y = 0;
+        public void Initialize(Transform playerTarget)
+        {
+            target = playerTarget;
+        }
 
-        agent.SetDestination(target.position + offset);
-    }
+        public void Tick(float dt)
+        {
+            if (!target) return;
 
-    private void Attack(Vector3 targetPos, float dt)
-    {
-        agent.isStopped = true;
+            float distSqr = (enemyTransform.position - target.position).sqrMagnitude;
 
-        Vector3 lookDir = (targetPos - transform.position).normalized;
-        lookDir.y = 0;
-        transform.forward = lookDir;
+            if (distSqr > data.stoppingDistance * data.stoppingDistance)
+            {
+                ChasePlayer(dt);
+            }
+            else
+            {
+                Attack(target.position, dt);
+            }
+        }
 
-        fireTimer += dt;
+        private void ChasePlayer(float dt)
+        {
+            agent.isStopped = false;
 
-        if (fireTimer < data.fireRate)
-            return;
+            pathUpdateTimer += dt;
 
-        fireTimer = 0f;
-        Shoot(targetPos);
-    }
+            if (pathUpdateTimer < 0.25f)
+                return;
 
-    private void Shoot(Vector3 targetPos)
-    {
-        Projectile proj = ProjectilePool.Instance.Get();
+            pathUpdateTimer = 0f;
 
-        proj.transform.SetPositionAndRotation(
-            firePoint.position,
-            firePoint.rotation
-        );
+            Vector3 offset = Random.insideUnitSphere * 1.5f;
+            offset.y = 0;
 
-        proj.Initialize(
-            targetPos,
-            data.projectileSpeed,
-            data.projectileDamage
-        );
-    }
+            agent.SetDestination(target.position + offset);
+        }
 
-    public void Die()
-    {
-        OnEnemyKilled?.Invoke(this);
-        gameObject.SetActive(false);
+        private void Attack(Vector3 targetPos, float dt)
+        {
+            agent.isStopped = true;
+
+            Vector3 lookDir = (targetPos - enemyTransform.position).normalized;
+            lookDir.y = 0;
+            enemyTransform.forward = lookDir;
+
+            fireTimer += dt;
+
+            if (fireTimer < data.fireRate)
+                return;
+
+            fireTimer = 0f;
+            Shoot(targetPos);
+        }
+
+        private void Shoot(Vector3 targetPos)
+        {
+            Projectile proj = ProjectilePool.Instance.Get();
+
+            proj.transform.SetPositionAndRotation(
+                firePoint.position,
+                firePoint.rotation
+            );
+
+            proj.Initialize(
+                targetPos,
+                data.projectileSpeed,
+                data.projectileDamage
+            );
+        }
+
+        public void Die()
+        {
+            OnEnemyKilled?.Invoke(this);
+            gameObject.SetActive(false);
+        }
     }
 }

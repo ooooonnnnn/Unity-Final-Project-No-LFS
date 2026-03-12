@@ -1,45 +1,47 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class ProjectilePool : MonoBehaviour
+namespace ScriptsMilana
 {
-    public static ProjectilePool Instance;
-
-    [SerializeField] private Projectile projectilePrefab;
-    [SerializeField] private int poolSize = 30;
-
-    private Queue<Projectile> pool = new();
-
-    private void Awake()
+    public class ProjectilePool : MonoBehaviour
     {
-        Instance = this;
+        public static ProjectilePool Instance;
 
-        for (int i = 0; i < poolSize; i++)
-        {
-            Projectile proj = Instantiate(projectilePrefab);
-            proj.gameObject.SetActive(false);
-            pool.Enqueue(proj);
-        }
-    }
+        [SerializeField] private Projectile projectilePrefab;
+        [SerializeField] private int poolSize = 30;
 
-    public Projectile Get()
-    {
-        if (pool.Count == 0)
+        private Queue<Projectile> pool = new();
+
+        private void Awake()
         {
-            Projectile proj = Instantiate(projectilePrefab);
-            return proj;
+            Instance = this;
+
+            for (int i = 0; i < poolSize; i++)
+            {
+                Projectile proj = Instantiate(projectilePrefab);
+                proj.gameObject.SetActive(false);
+                pool.Enqueue(proj);
+            }
         }
 
-        Projectile projectile = pool.Dequeue();
-        projectile.gameObject.SetActive(true);
+        public Projectile Get()
+        {
+            if (pool.Count == 0)
+            {
+                Projectile proj = Instantiate(projectilePrefab);
+                return proj;
+            }
 
-        return projectile;
-    }
+            Projectile projectile = pool.Dequeue();
+            projectile.gameObject.SetActive(true);
 
-    public void Return(Projectile projectile)
-    {
-        projectile.gameObject.SetActive(false);
-        pool.Enqueue(projectile);
+            return projectile;
+        }
+
+        public void Return(Projectile projectile)
+        {
+            projectile.gameObject.SetActive(false);
+            pool.Enqueue(projectile);
+        }
     }
 }

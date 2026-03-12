@@ -1,9 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Sample {
+namespace character.GhostCharacter_Free.Scripts {
 public class GhostScript : MonoBehaviour
 {
     private Animator Anim;

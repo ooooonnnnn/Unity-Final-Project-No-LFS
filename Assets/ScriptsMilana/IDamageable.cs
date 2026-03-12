@@ -1,4 +1,7 @@
-public interface IDamageable
+namespace ScriptsMilana
 {
-    void TakeDamage(float damage);
+    public interface IDamageable
+    {
+        void TakeDamage(float damage);
+    }
 }

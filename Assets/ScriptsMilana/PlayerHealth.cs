@@ -1,13 +1,15 @@
 using UnityEngine;
 
-
-public class PlayerHealth : MonoBehaviour, IDamageable
+namespace ScriptsMilana
 {
-    public float health = 100;
-
-    public void TakeDamage(float damage)
+    public class PlayerHealth : MonoBehaviour, IDamageable
     {
-        health -= damage;
-        Debug.Log("Player hit. HP: " + health);
+        public float health = 100;
+
+        public void TakeDamage(float damage)
+        {
+            health -= damage;
+            Debug.Log("Player hit. HP: " + health);
+        }
     }
 }

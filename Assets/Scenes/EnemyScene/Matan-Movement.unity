@@ -1236,6 +1236,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5914331880644474612, guid: bf93d3fad20b4424098bf36bddb0152e, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5914331880644474612, guid: bf93d3fad20b4424098bf36bddb0152e, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5914331880644474612, guid: bf93d3fad20b4424098bf36bddb0152e, type: 3}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5914331880644474612, guid: bf93d3fad20b4424098bf36bddb0152e, type: 3}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5914331880644474612, guid: bf93d3fad20b4424098bf36bddb0152e, type: 3}
+      propertyPath: m_LinearDamping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5914331880644474612, guid: bf93d3fad20b4424098bf36bddb0152e, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7318191233419622573, guid: bf93d3fad20b4424098bf36bddb0152e, type: 3}
       propertyPath: m_Name
       value: Player

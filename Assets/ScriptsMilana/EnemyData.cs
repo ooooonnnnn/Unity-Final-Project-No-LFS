@@ -1,19 +1,22 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "EnemyData", menuName = "Game/EnemyData")]
-public class EnemyData : ScriptableObject
+namespace ScriptsMilana
 {
-    [Header("Movement")] 
-    public float moveSpeed = 3f;
+    [CreateAssetMenu(fileName = "EnemyData", menuName = "Game/EnemyData")]
+    public class EnemyData : ScriptableObject
+    {
+        [Header("Movement")] 
+        public float moveSpeed = 3f;
 
-    public float stoppingDistance = 8f;
+        public float stoppingDistance = 8f;
 
-    [Header("Attack")] 
-    public float fireRate = 2f;
+        [Header("Attack")] 
+        public float fireRate = 2f;
 
-    public float projectileSpeed = 12f;
-    public float projectileDamage = 10f;
+        public float projectileSpeed = 12f;
+        public float projectileDamage = 10f;
 
-    [Header("References")]
-    public GameObject projectilePrefab;
+        [Header("References")]
+        public GameObject projectilePrefab;
+    }
 }

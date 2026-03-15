@@ -7,7 +7,7 @@ namespace ScriptsMilana
     {
         private static string SavePath => Application.persistentDataPath + "/save.json";
 
-        private static SaveData CurrentSave { get; set; }
+        public static SaveData CurrentSave { get; private set; }
 
         public static void Load()
         {
@@ -28,6 +28,11 @@ namespace ScriptsMilana
             string json = JsonUtility.ToJson(CurrentSave, true);
             File.WriteAllText(SavePath, json);
         }
+        public static void ResetSave()
+        {
+            CurrentSave = new SaveData();
+            Save();
+        }
         
         public static void UnlockNextLevel(int currentLevel)
         {
@@ -37,5 +42,6 @@ namespace ScriptsMilana
                 Save();
             }
         }
+        
     }
 }

@@ -8,12 +8,16 @@ namespace ScriptsMilana
 {
     public class EnemySpawner : MonoBehaviour
     {
-        [SerializeField] private WaveData wave;
+        [SerializeField] private WaveData[] levelWaves;
         [SerializeField] private Transform[] spawnPoints;
         [SerializeField] private Transform playerTarget;
+        [SerializeField] private GameObject levelCompleteUI;
 
         private int enemiesSpawned;
         private int enemiesAlive;
+        private WaveData wave;
+        
+       
     
         public static event Action OnWaveCompleted;
     
@@ -25,17 +29,26 @@ namespace ScriptsMilana
 
         private void Start()
         {
-            NotifyEnemyCountChanged(); 
+            int levelIndex = LevelManager.Instance.CurrentLevelIndex;
+
+            if (levelIndex >= levelWaves.Length)
+                levelIndex = 0;
+
+            wave = levelWaves[levelIndex];
+            
+            NotifyEnemyCountChanged();
             StartCoroutine(SpawnRoutine());
         }
         private void OnEnable()
         {
             EnemyBase.OnEnemyKilled += HandleEnemyKilled;
+            OnWaveCompleted += HandleLevelComplete;
         }
 
         private void OnDisable()
         {
             EnemyBase.OnEnemyKilled -= HandleEnemyKilled;
+            OnWaveCompleted -= HandleLevelComplete;
         }
 
         private IEnumerator SpawnRoutine()
@@ -103,7 +116,7 @@ namespace ScriptsMilana
 
             SaveSystem.UnlockNextLevel(levelIndex);
 
-          //  levelCompleteUI.SetActive(true);
+            levelCompleteUI.SetActive(true);
         }
     }
 }

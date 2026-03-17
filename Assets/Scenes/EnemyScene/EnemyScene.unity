@@ -1531,6 +1531,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4877522347301581382, guid: a733d885e2bee9543a7f2cb879d9375f, type: 3}
+      propertyPath: zoomSpeed
+      value: 800
+      objectReference: {fileID: 0}
+    - target: {fileID: 4877522347301581382, guid: a733d885e2bee9543a7f2cb879d9375f, type: 3}
       propertyPath: followTarget
       value: 
       objectReference: {fileID: 1892064449}

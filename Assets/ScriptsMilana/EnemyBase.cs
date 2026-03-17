@@ -8,12 +8,22 @@ namespace ScriptsMilana
         [SerializeField] private EnemyData data;
         [SerializeField] private Transform firePoint;
         [SerializeField] private NavMeshAgent agent;
+        [SerializeField] private Animator animator;
+        [SerializeField] private Transform visual;
+
+        private static readonly int IsMovingHash = Animator.StringToHash("IsMoving");
+        private static readonly int AttackHash = Animator.StringToHash("Attack");
         private Transform target;
         private Transform enemyTransform;
 
     
         private float fireTimer;
         private float pathUpdateTimer;
+        private float stoppingDistanceSqr;
+        private bool isAttacking;
+        private bool isRotationLocked;
+        private Quaternion lockedRotation;
+        public float rotationSpeed = 360f;
 
         public static event System.Action<EnemyBase> OnEnemyKilled;
 
@@ -22,6 +32,8 @@ namespace ScriptsMilana
             enemyTransform = transform;
             agent.speed = data.moveSpeed;
             agent.stoppingDistance = data.stoppingDistance;
+            agent.updateRotation = false;
+            stoppingDistanceSqr = data.stoppingDistance * data.stoppingDistance;
 
         
             agent.avoidancePriority = Random.Range(40, 90);
@@ -46,16 +58,62 @@ namespace ScriptsMilana
         {
             if (!target) return;
 
-            float distSqr = (enemyTransform.position - target.position).sqrMagnitude;
+            
+            var enemyPos = enemyTransform.position;
+            var targetPos = target.position;
+            float distSqr = (enemyPos - targetPos).sqrMagnitude;
+            bool isMoving = distSqr > stoppingDistanceSqr;
 
-            if (distSqr > data.stoppingDistance * data.stoppingDistance)
+            bool isAttacking = IsInAttackState();
+
+            if (isAttacking)
+            {
+                if (!isRotationLocked)
+                {
+                    lockedRotation = enemyTransform.rotation;
+                    isRotationLocked = true;
+                }
+
+                enemyTransform.rotation = lockedRotation;
+            }
+            else
+            {
+                isRotationLocked = false;
+
+                if (isMoving && agent.hasPath && agent.velocity.sqrMagnitude > 0.1f)
+                {
+                    RotateTowardsTarget(dt);
+                }
+            }
+
+
+            
+
+            
+            
+            animator.SetBool(IsMovingHash, isMoving);
+
+            if (isMoving)
             {
                 ChasePlayer(dt);
             }
             else
             {
-                Attack(target.position, dt);
+                Attack(targetPos, dt);
             }
+        }
+        private void RotateTowardsTarget(float dt)
+        {
+            if (agent.velocity.sqrMagnitude < 0.1f)
+                return;
+
+            Vector3 direction = agent.velocity;
+            direction.y = 0f;
+
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+            enemyTransform.rotation = Quaternion.RotateTowards(enemyTransform.rotation, targetRotation, rotationSpeed * dt
+            );
         }
 
         private void ChasePlayer(float dt)
@@ -78,17 +136,16 @@ namespace ScriptsMilana
         private void Attack(Vector3 targetPos, float dt)
         {
             agent.isStopped = true;
-
-            Vector3 lookDir = (targetPos - enemyTransform.position).normalized;
-            lookDir.y = 0;
-            enemyTransform.forward = lookDir;
-
+            
             fireTimer += dt;
 
             if (fireTimer < data.fireRate)
                 return;
 
             fireTimer = 0f;
+            isAttacking = true;
+
+            animator.SetTrigger(AttackHash); 
             Shoot(targetPos);
         }
 
@@ -106,6 +163,12 @@ namespace ScriptsMilana
                 data.projectileSpeed,
                 data.projectileDamage
             );
+        }
+        
+        private bool IsInAttackState()
+        {
+            var state = animator.GetCurrentAnimatorStateInfo(0);
+            return state.IsName("Attack");
         }
 
         public void Die()

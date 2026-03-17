@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec46cb04e35b764aaca1e2a8d74c54c, type: 3}
   m_Name: BaseEnemy
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  moveSpeed: 10
+  moveSpeed: 6
   stoppingDistance: 8
   fireRate: 2
   projectileSpeed: 12

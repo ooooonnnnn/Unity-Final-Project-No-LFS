@@ -119,23 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &32951016 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9002113045805222921, guid: c9acb1bddb4906d428caceed8d270335, type: 3}
-  m_PrefabInstance: {fileID: 5544443514225284432}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &32951019
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 32951016}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0d49a26a0b26844e81c67dd3ef735e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ScriptsMilana.GameBoot
 --- !u!1 &227550260
 GameObject:
   m_ObjectHideFlags: 0
@@ -2422,10 +2405,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 9002113045805222921, guid: c9acb1bddb4906d428caceed8d270335, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 32951019}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9acb1bddb4906d428caceed8d270335, type: 3}
 --- !u!1001 &5555922683018756034
 PrefabInstance:
@@ -2487,6 +2467,22 @@ PrefabInstance:
       propertyPath: levelCompleteUI
       value: 
       objectReference: {fileID: 915642139}
+    - target: {fileID: 8019008827545678463, guid: ceafa355cc51adb4d902f997ed450ad0, type: 3}
+      propertyPath: levels.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8019008827545678463, guid: ceafa355cc51adb4d902f997ed450ad0, type: 3}
+      propertyPath: 'levels.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: b48cb816f6701914aaf37db06dfb04e0, type: 2}
+    - target: {fileID: 8019008827545678463, guid: ceafa355cc51adb4d902f997ed450ad0, type: 3}
+      propertyPath: 'levels.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 887fbf6efdc84a3439cd93c42078255c, type: 2}
+    - target: {fileID: 8019008827545678463, guid: ceafa355cc51adb4d902f997ed450ad0, type: 3}
+      propertyPath: 'levels.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 9be4755de97f90941b84cea407c73edc, type: 2}
     - target: {fileID: 8019008827545678463, guid: ceafa355cc51adb4d902f997ed450ad0, type: 3}
       propertyPath: levelWaves.Array.size
       value: 3

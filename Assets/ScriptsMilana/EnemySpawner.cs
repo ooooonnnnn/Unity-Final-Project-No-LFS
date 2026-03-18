@@ -8,7 +8,7 @@ namespace ScriptsMilana
 {
     public class EnemySpawner : MonoBehaviour
     {
-        [SerializeField] private WaveData[] levelWaves;
+        [SerializeField] private LevelData[] levels;
         [SerializeField] private Transform[] spawnPoints;
         [SerializeField] private Transform playerTarget;
         [SerializeField] private GameObject levelCompleteUI;
@@ -31,13 +31,10 @@ namespace ScriptsMilana
         {
             int levelIndex = LevelManager.Instance.CurrentLevelIndex;
 
-            if (levelIndex >= levelWaves.Length)
+            if (levelIndex >= levels.Length)
                 levelIndex = 0;
 
-            wave = levelWaves[levelIndex];
-            
-            NotifyEnemyCountChanged();
-            StartCoroutine(SpawnRoutine());
+            StartCoroutine(SpawnRoutine(levels[levelIndex]));
         }
         private void OnEnable()
         {
@@ -51,18 +48,43 @@ namespace ScriptsMilana
             OnWaveCompleted -= HandleLevelComplete;
         }
 
-        private IEnumerator SpawnRoutine()
+        private IEnumerator SpawnRoutine(LevelData level)
         {
-            while (enemiesSpawned < wave.totalEnemies)
+            foreach (var waveData in level.waves)
             {
-                SpawnBatch();
-                yield return new WaitForSeconds(wave.spawnInterval);
+                wave = waveData;
+
+                enemiesSpawned = 0;
+
+                NotifyEnemyCountChanged();
+                
+                while (enemiesSpawned < wave.totalEnemies)
+                {
+                    SpawnBatch();
+
+                    yield return new WaitForSeconds(wave.spawnInterval);
+                }
+                
+                while (enemiesAlive > 0)
+                {
+                    yield return null;
+                }
+                
+                if (wave.delayAfterWave > 0)
+                {
+                    yield return new WaitForSeconds(wave.delayAfterWave);
+                }
             }
+
+           
+            Debug.Log("Level Complete!");
+            OnWaveCompleted?.Invoke();
         }
 
         private void SpawnBatch()
         {
-            int spawnCount = Mathf.Min(wave.batchSize, wave.totalEnemies - enemiesSpawned);
+            int remaining = wave.totalEnemies - enemiesSpawned;
+            int spawnCount = Mathf.Min(wave.batchSize, remaining);
 
             for (int i = 0; i < spawnCount; i++)
             {
@@ -94,18 +116,12 @@ namespace ScriptsMilana
             enemiesAlive++;
             NotifyEnemyCountChanged();
         }
-        private void HandleEnemyKilled(EnemyBase enemy) // tracks how many enemies are alive
+        private void HandleEnemyKilled(EnemyBase enemy)
         {
             enemiesAlive--;
             NotifyEnemyCountChanged();
-
-            if (enemiesAlive == 0 && enemiesSpawned == wave.totalEnemies) // once all enemies die, wave completed event fires
-            {
-                Debug.Log("Wave Complete!");
-                OnWaveCompleted?.Invoke();
-            }
-        
         }
+        
         private void NotifyEnemyCountChanged()
         {
             OnEnemyCountChanged?.Invoke(enemiesAlive, enemiesSpawned, wave.totalEnemies);

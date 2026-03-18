@@ -1,39 +1,41 @@
 using UnityEngine;
 
-
-public class Projectile : MonoBehaviour
+namespace ScriptsMilana
 {
-    private float speed;
-    private float damage;
-    private Vector3 direction;
-
-    private Transform _transform;
-
-    private void Awake()
+    public class Projectile : MonoBehaviour
     {
-        _transform = transform;
-    }
+        private float speed;
+        private float damage;
+        private Vector3 direction;
 
-    public void Initialize(Vector3 targetPos, float speed, float damage)
-    {
-        this.speed = speed;
-        this.damage = damage;
+        private Transform _transform;
 
-        direction = (targetPos - _transform.position).normalized;
-    }
-
-    private void Update()
-    {
-        _transform.position += direction * (speed * Time.deltaTime);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.TryGetComponent(out IDamageable damageable))
+        private void Awake()
         {
-            damageable.TakeDamage(damage);
+            _transform = transform;
         }
 
-        ProjectilePool.Instance.Return(this);
+        public void Initialize(Vector3 targetPos, float speed, float damage)
+        {
+            this.speed = speed;
+            this.damage = damage;
+
+            direction = (targetPos - _transform.position).normalized;
+        }
+
+        private void Update()
+        {
+            _transform.position += direction * (speed * Time.deltaTime);
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.TryGetComponent(out IDamageable damageable))
+            {
+                damageable.TakeDamage(damage);
+            }
+
+            ProjectilePool.Instance.Return(this);
+        }
     }
 }

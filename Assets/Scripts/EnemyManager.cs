@@ -2,46 +2,49 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class EnemyManager : MonoBehaviour
+namespace ScriptsMilana
 {
-    private static readonly List<EnemyBase> enemies = new();
-    public static IReadOnlyList<EnemyBase> Enemies => enemies;
-
-    public static void Register(EnemyBase enemy)
+    public class EnemyManager : MonoBehaviour
     {
-        if (!enemies.Contains(enemy))
-            enemies.Add(enemy);
-    }
+        private static readonly List<EnemyBase> enemies = new();
+        public static IReadOnlyList<EnemyBase> Enemies => enemies;
 
-    public static void Unregister(EnemyBase enemy)
-    {
-        enemies.Remove(enemy);
-    }
-
-    private void Update()
-    {
-        float dt = Time.deltaTime;
-
-        for (int i = 0; i < enemies.Count; i++)
+        public static void Register(EnemyBase enemy)
         {
-            enemies[i].Tick(dt);
+            if (!enemies.Contains(enemy))
+                enemies.Add(enemy);
         }
-        if (Keyboard.current.kKey.wasPressedThisFrame)
+
+        public static void Unregister(EnemyBase enemy)
         {
-            KillAllEnemies();
+            enemies.Remove(enemy);
         }
+
+        private void Update()
+        {
+            float dt = Time.deltaTime;
+
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                enemies[i].Tick(dt);
+            }
+            if (Keyboard.current.kKey.wasPressedThisFrame)
+            {
+                KillAllEnemies();
+            }
         
         
-    }
-    private void KillAllEnemies()
-    {
-        // Copy list because enemies will unregister themselves when disabled
-        var enemiesCopy = new List<EnemyBase>(enemies);
-
-        foreach (var enemy in enemiesCopy)
-        {
-            enemy.Die();
         }
-        Debug.Log("All enemies killed");
+        private void KillAllEnemies()
+        {
+            // Copy list because enemies will unregister themselves when disabled
+            var enemiesCopy = new List<EnemyBase>(enemies);
+
+            foreach (var enemy in enemiesCopy)
+            {
+                enemy.Die();
+            }
+            Debug.Log("All enemies killed");
+        }
     }
 }

@@ -6,7 +6,6 @@ public class AgentAnimator : MonoBehaviour
     private Animator _animator;
     private NavMeshAgent _agent;
     
-    private int _waterAreaIndex;
     
     private static readonly int MoveX = Animator.StringToHash("MoveX");
     private static readonly int MoveY = Animator.StringToHash("MoveY");
@@ -20,7 +19,6 @@ public class AgentAnimator : MonoBehaviour
         _animator = GetComponent<Animator>();
         _agent = GetComponentInParent<NavMeshAgent>();
         
-        _waterAreaIndex = NavMesh.GetAreaFromName("Water");
     }
 
     // private void OnEnable()
@@ -40,7 +38,6 @@ public class AgentAnimator : MonoBehaviour
         if (!_agent) return;
         
         UpdateMovementParameters();
-        UpdateWaterState();
     }
 
     private void UpdateMovementParameters()
@@ -56,15 +53,7 @@ public class AgentAnimator : MonoBehaviour
         _animator.SetFloat(Speed, speed);
     }
 
-    private void UpdateWaterState()
-    {
-        if (!NavMesh.SamplePosition(transform.position, out var hit, 0.5f, NavMesh.AllAreas))
-            return;
-        
-        var isInWater = (hit.mask & (1 << _waterAreaIndex)) != 0;
-        
-        _animator.SetBool(IsSwimming, isInWater);
-    }
+    
 
     public void PlayWave()
     {

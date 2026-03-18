@@ -51,25 +51,6 @@ public class GameManager : MonoBehaviour
         selectedCharacter = characterController.CurrentCharacter;
         UpdateResetPrompt();
     }
-
-    public void NotifyCharacterEnterResetZone(CharacterComponents character)
-    {
-        if (!character)
-            return;
-
-        charactersInResetZone.Add(character);
-        UpdateResetPrompt();
-    }
-
-    public void NotifyCharacterExitResetZone(CharacterComponents character)
-    {
-        if (!character)
-            return;
-
-        charactersInResetZone.Remove(character);
-        UpdateResetPrompt();
-    }
-
     private void HandleCharacterChange(CharacterComponents character)
     {
         selectedCharacter = character;
@@ -84,14 +65,7 @@ public class GameManager : MonoBehaviour
         if (!charactersInResetZone.Contains(selectedCharacter))
             return;
 
-        if (SurfaceTypeManager.Instance.GetSurfaceNameByMask(selectedCharacter.navMeshAgent.areaMask) == "Spectator")
-        {
-            characterController.Respawn();
-        }
-        else
-        {
-            selectedCharacter.ResetToStart();    
-        }
+   
         UIManager.Instance.LogMessage($"{selectedCharacter.gameObject.name} reset to start.");
     }
 

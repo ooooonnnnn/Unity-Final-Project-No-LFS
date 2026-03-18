@@ -17,5 +17,5 @@ MonoBehaviour:
   - {fileID: 8520818316116910619, guid: 23d91e9b654e09945a8960af9df0405c, type: 3}
   totalEnemies: 10
   batchSize: 5
-  spawnInterval: 10
+  spawnInterval: 2
   delayAfterWave: 0

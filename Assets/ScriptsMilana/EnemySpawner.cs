@@ -16,9 +16,15 @@ namespace ScriptsMilana
         private int enemiesSpawned;
         private int enemiesAlive;
         private WaveData wave;
+        private bool waitingForWaveEnd;
         
-       
-    
+        
+        
+        
+        public static event Action<float> OnWaveDelayStarted;
+        
+        public static event Action<float> OnWaveDelayUpdated;
+        
         public static event Action OnWaveCompleted;
     
         public static event Action<int, int, int> OnEnemyCountChanged; // for the ui
@@ -33,52 +39,54 @@ namespace ScriptsMilana
 
             if (levelIndex >= levels.Length)
                 levelIndex = 0;
+            
+            EnemyBase.OnEnemyKilled += HandleEnemyKilled;
+            OnWaveCompleted += HandleLevelComplete;
 
             StartCoroutine(SpawnRoutine(levels[levelIndex]));
         }
-        private void OnEnable()
-        {
-            EnemyBase.OnEnemyKilled += HandleEnemyKilled;
-            OnWaveCompleted += HandleLevelComplete;
-        }
-
-        private void OnDisable()
-        {
-            EnemyBase.OnEnemyKilled -= HandleEnemyKilled;
-            OnWaveCompleted -= HandleLevelComplete;
-        }
-
+        
         private IEnumerator SpawnRoutine(LevelData level)
         {
-            foreach (var waveData in level.waves)
+            for (int i = 0; i < level.waves.Length; i++)
             {
-                wave = waveData;
+                wave = level.waves[i];
+                Debug.Log("Wave " + wave);
 
                 enemiesSpawned = 0;
+                enemiesAlive = 0;
 
                 NotifyEnemyCountChanged();
-                
+
                 while (enemiesSpawned < wave.totalEnemies)
                 {
                     SpawnBatch();
-
                     yield return new WaitForSeconds(wave.spawnInterval);
                 }
-                
-                while (enemiesAlive > 0)
+
+                waitingForWaveEnd = true;
+
+                while (waitingForWaveEnd)
                 {
                     yield return null;
                 }
-                
-                if (wave.delayAfterWave > 0)
+
+                bool isLastWave = (i + 1 == level.waves.Length);
+                Debug.Log("Is last wave:" +isLastWave);
+
+                if (!isLastWave)
                 {
-                    yield return new WaitForSeconds(wave.delayAfterWave);
+                    if (wave.delayAfterWave > 0)
+                    {
+                        yield return StartCoroutine(RunWaveDelay(wave.delayAfterWave));
+                    }
+                }
+                else
+                {
+                    Debug.Log("Level Complete!");
+                    OnWaveCompleted?.Invoke();
                 }
             }
-
-           
-            Debug.Log("Level Complete!");
-            OnWaveCompleted?.Invoke();
         }
 
         private void SpawnBatch()
@@ -118,8 +126,28 @@ namespace ScriptsMilana
         }
         private void HandleEnemyKilled(EnemyBase enemy)
         {
-            enemiesAlive--;
+            enemiesAlive = Mathf.Max(0, enemiesAlive - 1);
             NotifyEnemyCountChanged();
+
+            if (enemiesAlive == 0 && waitingForWaveEnd)
+            {
+                waitingForWaveEnd = false;
+            }
+        }
+        
+        private IEnumerator RunWaveDelay(float delay)
+        {
+            int secondsLeft = Mathf.RoundToInt(delay);
+
+            OnWaveDelayStarted?.Invoke(secondsLeft);
+            OnWaveDelayUpdated?.Invoke(secondsLeft);
+
+            while (secondsLeft > 0)
+            {
+                yield return new WaitForSeconds(1f);
+                secondsLeft--;
+                OnWaveDelayUpdated?.Invoke(secondsLeft);
+            }
         }
         
         private void NotifyEnemyCountChanged()

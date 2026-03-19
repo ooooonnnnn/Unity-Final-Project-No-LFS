@@ -45,4 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectilePool
   projectilePrefab: {fileID: -335621552214816184, guid: da10c2724da12f74dbc01a2c4c41a56f, type: 3}
-  poolSize: 30
+  poolSize: 16

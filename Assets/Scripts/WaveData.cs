@@ -12,5 +12,6 @@ namespace ScriptsMilana
         public int totalEnemies = 20;
         public int batchSize = 3;
         public float spawnInterval = 2f;
+        public float delayAfterWave = 10f;
     }
 }

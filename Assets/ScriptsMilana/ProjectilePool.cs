@@ -1,47 +1,45 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ScriptsMilana
+public class ProjectilePool : MonoBehaviour
 {
-    public class ProjectilePool : MonoBehaviour
+    public static ProjectilePool Instance;
+
+    private Dictionary<GameObject, Queue<GameObject>> pool = new();
+
+    private void Awake()
     {
-        public static ProjectilePool Instance;
+        Instance = this;
+    }
 
-        [SerializeField] private Projectile projectilePrefab;
-        [SerializeField] private int poolSize = 30;
-
-        private Queue<Projectile> pool = new();
-
-        private void Awake()
+    public GameObject Get(GameObject prefab)
+    {
+        if (!pool.ContainsKey(prefab))
         {
-            Instance = this;
-
-            for (int i = 0; i < poolSize; i++)
-            {
-                Projectile proj = Instantiate(projectilePrefab);
-                proj.gameObject.SetActive(false);
-                pool.Enqueue(proj);
-            }
+            pool[prefab] = new Queue<GameObject>();
         }
 
-        public Projectile Get()
+        var queue = pool[prefab];
+
+        if (queue.Count > 0)
         {
-            if (pool.Count == 0)
-            {
-                Projectile proj = Instantiate(projectilePrefab);
-                return proj;
-            }
-
-            Projectile projectile = pool.Dequeue();
-            projectile.gameObject.SetActive(true);
-
-            return projectile;
+            GameObject obj = queue.Dequeue();
+            obj.SetActive(true);
+            return obj;
         }
 
-        public void Return(Projectile projectile)
+        return Instantiate(prefab);
+    }
+
+    public void Return(GameObject prefab, GameObject obj)
+    {
+        obj.SetActive(false);
+
+        if (!pool.ContainsKey(prefab))
         {
-            projectile.gameObject.SetActive(false);
-            pool.Enqueue(projectile);
+            pool[prefab] = new Queue<GameObject>();
         }
+
+        pool[prefab].Enqueue(obj);
     }
 }

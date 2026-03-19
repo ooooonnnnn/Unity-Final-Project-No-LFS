@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7970375774544958947}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -18.19632, y: 0, z: -9.28531}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -47,4 +47,4 @@ MonoBehaviour:
   spawnPoint: {fileID: 0}
   characterController: {fileID: 0}
   inputManager: {fileID: 0}
-  resetPromptMessage: Press Interact to reset the selected character.
+  resetPromptMessage: Press R to reset the selected character.

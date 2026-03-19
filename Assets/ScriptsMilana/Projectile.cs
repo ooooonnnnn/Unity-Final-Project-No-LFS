@@ -1,41 +1,64 @@
+using ScriptsMilana;
 using UnityEngine;
 
-namespace ScriptsMilana
+public class Projectile : MonoBehaviour, ISpellable
 {
-    public class Projectile : MonoBehaviour
+    private SpellComboDefinition _combo;
+    private Transform _target;
+    private float _speed;
+    private float _damage;
+
+    private Transform _transform;
+
+    private void Awake()
     {
-        private float speed;
-        private float damage;
-        private Vector3 direction;
+        _transform = transform;
+    }
 
-        private Transform _transform;
-
-        private void Awake()
+    public void Initialize(SpellComboDefinition combo, Transform caster, Transform target)
+    {
+        _combo = combo;
+        _target = target;
+        _speed = combo.speed;
+        _damage = combo.powerMultiplier;
+        
+        if (_target)
         {
-            _transform = transform;
+            Vector3 dir = (_target.position - _transform.position).normalized;
+            _transform.forward = dir;
+        }
+    }
+    private void Update()
+    {
+        if (!_target)
+        {
+            Destroy(gameObject);
+            return;
         }
 
-        public void Initialize(Vector3 targetPos, float speed, float damage)
-        {
-            this.speed = speed;
-            this.damage = damage;
+        Vector3 direction = (_target.position - _transform.position).normalized;
+        _transform.position += direction * (_speed * Time.deltaTime);
+    }
 
-            direction = (targetPos - _transform.position).normalized;
+    private void OnTriggerEnter(Collider other)
+    {
+        if (_target == null)
+            return;
+
+        if (other.transform != _target)
+            return;
+
+        if (other.TryGetComponent<IDamageable>(out var damageable))
+        {
+            damageable.TakeDamage(_damage);
+            
+            if (_combo.appliesBurn)
+                Debug.Log("Apply Burn");
+
+            if (_combo.appliesFreeze)
+                Debug.Log("Apply Freeze");
         }
 
-        private void Update()
-        {
-            _transform.position += direction * (speed * Time.deltaTime);
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.TryGetComponent(out IDamageable damageable))
-            {
-                damageable.TakeDamage(damage);
-            }
-
-            ProjectilePool.Instance.Return(this);
-        }
+        ProjectilePool.Instance.Return(_combo.prefab, gameObject);
     }
 }

@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: Level2
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   levelName: Level2
-  wave: {fileID: 11400000, guid: 3fa0cf3356c048f4f9941a6cb96352f6, type: 2}
+  waves:
+  - {fileID: 11400000, guid: c3a8396e8f8fcb2469ae574da1924d85, type: 2}
+  - {fileID: 11400000, guid: ea28c8ea292cad541850913ee00c0b15, type: 2}
   levelIndex: 1

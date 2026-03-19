@@ -7,7 +7,7 @@ namespace ScriptsMilana
     {
         public string levelName;
 
-        public WaveData wave;
+        public WaveData[] waves;
     
         public int levelIndex;
     }

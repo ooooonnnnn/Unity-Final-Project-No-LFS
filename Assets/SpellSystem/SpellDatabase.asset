@@ -19,6 +19,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 99c1a9f5ee59fd841af59be9b48c5981, type: 2}
   - {fileID: 11400000, guid: 6c58ab15d5096a4478d2f33813f4f045, type: 2}
   - {fileID: 11400000, guid: 0d2fead27e97eca41a34251e65d298e9, type: 2}
+  - {fileID: 11400000, guid: 72a2158032d3588469633b6ef4e6ecfa, type: 2}
   spellTypes:
   - {fileID: 11400000, guid: 62f997c4d4fac1845b5aa6724a9dc423, type: 2}
   - {fileID: 11400000, guid: 718517056318d73428ddc8ca557a4a71, type: 2}
@@ -30,3 +31,12 @@ MonoBehaviour:
   - element: {fileID: 11400000, guid: 289df35240ea29945ac0355bf53a3b7d, type: 2}
     spellType: {fileID: 11400000, guid: 62f997c4d4fac1845b5aa6724a9dc423, type: 2}
     combo: {fileID: 11400000, guid: 0223e050c3de85242b9b534769a35660, type: 2}
+  - element: {fileID: 11400000, guid: 8d324e9d594f51e42b26724a00fe8626, type: 2}
+    spellType: {fileID: 11400000, guid: 718517056318d73428ddc8ca557a4a71, type: 2}
+    combo: {fileID: 11400000, guid: 1f5decc1f381871478d20d48708d843b, type: 2}
+  - element: {fileID: 11400000, guid: d6c19b99f44c1cf4fba0279e9c66fd93, type: 2}
+    spellType: {fileID: 11400000, guid: 718517056318d73428ddc8ca557a4a71, type: 2}
+    combo: {fileID: 11400000, guid: 234502657b37528458b886fb29c303d5, type: 2}
+  - element: {fileID: 11400000, guid: 99c1a9f5ee59fd841af59be9b48c5981, type: 2}
+    spellType: {fileID: 11400000, guid: 23f5a7b39870a6541a9728677e17fc54, type: 2}
+    combo: {fileID: 11400000, guid: 4fbb944660dc4c14586778cf24944b80, type: 2}

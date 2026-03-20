@@ -10,12 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eaf72a3b633144c44903981aea999c9f, type: 3}
-  m_Name: New_Element_New_Spell_Type_Combo 1
+  m_Name: Combo_Element 1__SpellType 1_asset
   m_EditorClassIdentifier: Assembly-CSharp::SpellComboDefinition
-  element: {fileID: 11400000, guid: 8d324e9d594f51e42b26724a00fe8626, type: 2}
-  spellType: {fileID: 11400000, guid: 718517056318d73428ddc8ca557a4a71, type: 2}
-  comboId: new_element_new_spell_type
-  displayName: New Element New Spell Type
+  element: {fileID: 11400000, guid: 3a35508c4ca17394fb59eee820467547, type: 2}
+  spellType: {fileID: 11400000, guid: 5421e25b71f5b654888dd81b08f53d31, type: 2}
   description: 
   isUnlockedByDefault: 1
   powerMultiplier: 1
@@ -23,8 +21,3 @@ MonoBehaviour:
   speed: 10
   radius: 1
   prefab: {fileID: 0}
-  appliesBurn: 0
-  appliesFreeze: 0
-  appliesPoison: 0
-  grantsShield: 0
-  healsTarget: 0

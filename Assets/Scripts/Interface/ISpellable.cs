@@ -1,7 +1,10 @@
+
 using UnityEngine;
 
-public interface ISpellable
+namespace Interface
 {
-    void Initialize(SpellComboDefinition combo, Transform caster, Transform target);
-    void Initialize(SpellComboDefinition combo, Transform caster);
+    public interface ISpellable
+    {
+        void Initialize(SpellComboDefinition combo, Transform caster, Transform target);
+    }
 }

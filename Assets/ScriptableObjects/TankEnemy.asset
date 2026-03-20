@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: TankEnemy
   m_EditorClassIdentifier: Assembly-CSharp::ScriptsMilana.EnemyData
   moveSpeed: 2
-  stoppingDistance: 0
+  minAttackRange: 8
+  maxAttackRange: 12
   fireRate: 3
   projectileSpeed: 12
   projectileDamage: 10

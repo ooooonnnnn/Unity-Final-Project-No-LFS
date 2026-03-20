@@ -1,4 +1,5 @@
-using ScriptsMilana;
+
+using Interface;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour, ISpellable

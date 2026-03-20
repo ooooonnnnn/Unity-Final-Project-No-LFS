@@ -1,6 +1,7 @@
 using UnityEngine;
+using Wave;
 
-namespace ScriptsMilana
+namespace Level
 {
     [CreateAssetMenu(menuName = "Game/Level Data")]
     public class LevelData : ScriptableObject

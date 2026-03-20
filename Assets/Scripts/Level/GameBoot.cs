@@ -1,6 +1,7 @@
+using Save;
 using UnityEngine;
 
-namespace ScriptsMilana
+namespace Level
 {
     public class GameBoot : MonoBehaviour
     {

@@ -2,8 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace ScriptsMilana
-{
+
     public class EnemyManager : MonoBehaviour
     {
         private static readonly List<EnemyBase> enemies = new();
@@ -47,4 +46,3 @@ namespace ScriptsMilana
             Debug.Log("All enemies killed");
         }
     }
-}

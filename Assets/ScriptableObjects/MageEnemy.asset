@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: MageEnemy
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   moveSpeed: 4
-  stoppingDistance: 14
+  minAttackRange: 12
+  maxAttackRange: 16
   fireRate: 6
   projectileSpeed: 3
   projectileDamage: 10

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ScriptsMilana
+namespace Level
 {
     [CreateAssetMenu(menuName = "Game/Level Database")]
     public class LevelDatabase : ScriptableObject

@@ -1,33 +1,36 @@
-using ScriptsMilana;
+using Save;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelButton : MonoBehaviour
+namespace Level
 {
-    [SerializeField] private int levelIndex;
-    [SerializeField] private Button button;
-    [SerializeField] private Image lockIcon;
-
-    private void Start()
+    public class LevelButton : MonoBehaviour
     {
-        int unlocked = SaveSystem.CurrentSave.highestUnlockedLevel;
+        [SerializeField] private int levelIndex;
+        [SerializeField] private Button button;
+        [SerializeField] private Image lockIcon;
 
-        bool isUnlocked = levelIndex <= unlocked;
-
-        button.interactable = isUnlocked;
-
-        if (lockIcon)
+        private void Start()
         {
-            lockIcon.gameObject.SetActive(!isUnlocked);
+            int unlocked = SaveSystem.CurrentSave.highestUnlockedLevel;
+
+            bool isUnlocked = levelIndex <= unlocked;
+
+            button.interactable = isUnlocked;
+
+            if (lockIcon)
+            {
+                lockIcon.gameObject.SetActive(!isUnlocked);
            
-        }
-        button.image.color = isUnlocked ? Color.white : Color.gray;
+            }
+            button.image.color = isUnlocked ? Color.white : Color.gray;
         
           
-    }
+        }
 
-    public void LoadLevel()
-    {
-        LevelManager.Instance.LoadLevel(levelIndex);
+        public void LoadLevel()
+        {
+            LevelManager.Instance.LoadLevel(levelIndex);
+        }
     }
 }

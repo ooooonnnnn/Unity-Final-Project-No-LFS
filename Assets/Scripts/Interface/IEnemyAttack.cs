@@ -1,9 +1,12 @@
 using UnityEngine;
 
-public interface IEnemyAttack // shared interface of all enemy attacks.
+namespace Interface
 {
-    void Initialize(Transform owner, Transform target);
-    void Tick(float dt);
-    bool IsInRange();
+    public interface IEnemyAttack // shared interface of all enemy attacks.
+    {
+        void Initialize(Transform owner, Transform target);
+        void Tick(float dt);
+        bool IsInRange();
+    }
 }
 

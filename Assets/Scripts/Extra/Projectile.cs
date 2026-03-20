@@ -1,5 +1,4 @@
 using Interface;
-using Spells.EditorTool;
 using UnityEngine;
 
 namespace Extra
@@ -54,12 +53,7 @@ namespace Extra
             if (other.TryGetComponent<IDamageable>(out var damageable))
             {
                 damageable.TakeDamage(_damage);
-            
-                if (_combo.appliesBurn)
-                    Debug.Log("Apply Burn");
-
-                if (_combo.appliesFreeze)
-                    Debug.Log("Apply Freeze");
+                
             }
 
             ProjectilePool.Instance.Return(_combo.prefab, gameObject);

@@ -1,6 +1,5 @@
 using Extra;
 using Interface;
-using Spells.EditorTool;
 using UnityEngine;
 
 namespace Enemy
@@ -32,47 +31,9 @@ namespace Enemy
                     spellBehaviour.Initialize(spellCombo, caster, target);
                 }
             }
-            else
-            {
-                ApplyDirectEffect(target);
-            }
+            
         }
 
-        private void ApplyDirectEffect(Transform target)
-        {
-            if (!target)
-                return;
-
-            if (target.TryGetComponent<IDamageable>(out var damageable))
-            {
-                damageable.TakeDamage(spellCombo.powerMultiplier);
-            }
-
-            if (spellCombo.appliesBurn)
-            {
-                Debug.Log("Apply Burn");
-            }
-
-            if (spellCombo.appliesFreeze)
-            {
-                Debug.Log("Apply Freeze");
-            }
-
-            if (spellCombo.appliesPoison)
-            {
-                Debug.Log("Apply Poison");
-            }
-
-            if (spellCombo.healsTarget)
-            {
-                Debug.Log("Heal Target");
-            }
-
-            if (spellCombo.grantsShield)
-            {
-                Debug.Log("Grant Shield");
-            }
-        }
-    }
+     }
 }
 

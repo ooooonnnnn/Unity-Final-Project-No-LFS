@@ -589,8 +589,6 @@ MonoBehaviour:
   levelIndex: 0
   button: {fileID: 417349253}
   lockIcon: {fileID: 787194361}
-  hoverScale: 1.1
-  tweenDuration: 0.2
 --- !u!1 &778125110
 GameObject:
   m_ObjectHideFlags: 0
@@ -1302,8 +1300,6 @@ MonoBehaviour:
   levelIndex: 1
   button: {fileID: 1472605566}
   lockIcon: {fileID: 35167358}
-  hoverScale: 1.1
-  tweenDuration: 0.2
 --- !u!1 &1549672291
 GameObject:
   m_ObjectHideFlags: 0
@@ -1453,8 +1449,6 @@ MonoBehaviour:
   levelIndex: 2
   button: {fileID: 1549672293}
   lockIcon: {fileID: 778125112}
-  hoverScale: 1.1
-  tweenDuration: 0.2
 --- !u!1001 &1797208883
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1507,9 +1501,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelManager
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8356905618636194069, guid: c9acb1bddb4906d428caceed8d270335, type: 3}
-    - {fileID: 4847676302259368653, guid: c9acb1bddb4906d428caceed8d270335, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

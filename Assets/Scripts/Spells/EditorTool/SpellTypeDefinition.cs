@@ -3,9 +3,9 @@ using UnityEngine;
 public enum SpellDeliveryCategory
 {
     Projectile,
-    Shield,
-    Heal,
-    Area
+    AOE,
+    Strike,
+    Shield
 }
 
 [CreateAssetMenu(fileName = "NewSpellType", menuName = "Spells/Spell Type Definition")]

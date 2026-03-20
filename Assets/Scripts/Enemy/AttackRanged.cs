@@ -38,7 +38,11 @@ namespace Enemy
         public bool IsInRange()
         {
             float distSqr = (_owner.position - _target.position).sqrMagnitude;
-            return distSqr <= data.stoppingDistance * data.stoppingDistance;
+
+            float min = data.minAttackRange * data.minAttackRange;
+            float max = data.maxAttackRange * data.maxAttackRange;
+
+            return distSqr >= min && distSqr <= max;
         }
 
         private void PerformAttack()

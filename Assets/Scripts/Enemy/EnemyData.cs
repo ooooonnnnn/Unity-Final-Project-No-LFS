@@ -7,7 +7,8 @@ using UnityEngine;
         [Header("Movement")] 
         public float moveSpeed = 3f;
 
-        public float stoppingDistance = 8f;
+        public float minAttackRange; 
+        public float maxAttackRange; 
 
         [Header("Attack")] 
         public float fireRate = 2f;

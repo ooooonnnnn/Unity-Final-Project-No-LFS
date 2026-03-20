@@ -1,5 +1,4 @@
 using System;
-using ScriptsMilana;
 using Unity.Android.Gradle;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -7,18 +6,15 @@ using UnityEngine.Serialization;
 public class ProjectileBehavior : SpellBase
 {
     public float projectileSpeed = 10f;
-
+    
+    protected override void Awake()
+    {
+        base.Awake();
+        SpellType = SpellDeliveryCategory.Projectile;
+    }
+    
     private void Update()
     {
         transform.position += transform.forward * (projectileSpeed * Time.deltaTime);
     }
-
-    private void OnCollisionEnter(Collision other)
-    {
-        other.gameObject.TryGetComponent<ITakeSpellCombo>(out var component);
-        if (other.transform == Caster || component == null) return;
-        // Give the component the spell combo information
-        Destroy(gameObject);
-    }
-
 }

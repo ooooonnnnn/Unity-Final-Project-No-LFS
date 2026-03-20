@@ -4,7 +4,6 @@ using UnityEngine.Serialization;
 
 public class StrikeBehavior : SpellBase
 {
-    
     [SerializeField] private GameObject areaOfEffectZone;
     [SerializeField] private Vector3 targetPosition;
     [SerializeField] private float arcHeight = 5f;
@@ -12,18 +11,12 @@ public class StrikeBehavior : SpellBase
     private Vector3 startPosition;
     private float progress;
 
-    protected override void Initialize(SpellElement element, Transform caster)
+    protected override void Awake()
     {
-        base.Initialize(element, caster);
-        areaOfEffectZone.SetActive(false);
-        Element = element;
-        Caster = caster;
-        transform.position = caster.position;
-        transform.rotation = caster.rotation;
-        startPosition = transform.position;
-        progress = 0f;
-        targetPosition = caster.position + caster.forward * 10f;
+        base.Awake();
+        SpellType = SpellDeliveryCategory.Strike;
     }
+
     public void Update()
     {
         if (!(progress < 1f)) return;
@@ -36,19 +29,20 @@ public class StrikeBehavior : SpellBase
         transform.position = new Vector3(horizontalPosition.x, horizontalPosition.y + height, horizontalPosition.z);
     }
 
-    // Collision detection
-    private void OnCollisionEnter(Collision collision)
+    // Spawn the area of effect zone and apply spell effects to targets within the zone
+    protected override void OnCollisionEnter(Collision collision)
     {
         if (collision.transform == Caster) return;
         areaOfEffectZone.transform.position = transform.position;
         areaOfEffectZone.SetActive(true);
-        Collider[] colliders = Physics.OverlapSphere(transform.position, areaOfEffectZone.transform.lossyScale.x / 2f);
+        Collider[] targets = Physics.OverlapSphere(transform.position, areaOfEffectZone.transform.lossyScale.x / 2f);
 
-        foreach (var collider in colliders)
+        foreach (var target in targets)
         {
-            var taker = collider.GetComponent<ITakeSpellCombo>();
-            // Give all components that can take the spell combo information
+            target.TryGetComponent<ITakeSpellData>(out var taker);
+            taker?.TakeSpellData(element, SpellType);
         }
-    }
 
+        SelfDestruct();
+    }
 }

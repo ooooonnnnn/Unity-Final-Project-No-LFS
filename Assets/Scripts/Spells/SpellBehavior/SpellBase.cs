@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -5,7 +6,6 @@ using UnityEngine.Serialization;
 public enum SpellElement
 {
     Fire,
-    Earth,
     Ice,
     Light,
     Dark
@@ -13,45 +13,59 @@ public enum SpellElement
 
 public class SpellBase : MonoBehaviour
 {
-    protected SpellElement Element;
+    public SpellElement element;
+    [SerializeField] private ParticleSystem fireParticlePrefab;
+    [SerializeField] private ParticleSystem iceParticlePrefab;
+    // Add more particle prefabs for other elements as needed
+    private ParticleSystem activeParticlePrefab;
+    protected SpellDeliveryCategory SpellType;
     protected Transform Caster;
-    protected float LifeTime = 5f;
-    [SerializeField] private ParticleSystem fireParticleSystem;
-    [SerializeField] private ParticleSystem iceParticleSystem;
-    [SerializeField] private ParticleSystem lightParticleSystem;
-    [SerializeField] private ParticleSystem shadowParticleSystem;
+    private const float LifeTime = 5f;
 
-    protected virtual void Initialize(SpellElement element, Transform caster)
+    protected virtual void Awake()
     {
-        Element = element;
-        this.Caster = caster;
-        switch (Element)
+        this.Caster = gameObject.transform.parent;
+        gameObject.transform.parent = null; // Detach from caster to allow independent movement
+        transform.position = Caster.position;
+        transform.rotation = Caster.rotation;
+
+        switch (element)
         {
             case SpellElement.Fire:
-                fireParticleSystem.Play();
-                break;
-            case SpellElement.Earth:
+                    activeParticlePrefab = Instantiate(fireParticlePrefab, transform.position, transform.rotation);
+                    activeParticlePrefab.transform.parent = transform;
                 break;
             case SpellElement.Ice:
-                iceParticleSystem.Play();
+                    activeParticlePrefab = Instantiate(iceParticlePrefab, transform.position, transform.rotation);
+                    activeParticlePrefab.transform.parent = transform;
                 break;
             case SpellElement.Light:
-                lightParticleSystem.Play();
-                break;
             case SpellElement.Dark:
-                shadowParticleSystem.Play();
+                // Instantiate corresponding particle effects for Earth, Light, and Dark elements
                 break;
             default:
-                print("Unknown spell element: " + Element);
-                break;
+                throw new ArgumentOutOfRangeException();
         }
-
         StartCoroutine(DestroyAfterLifeTime());
     }
-
     IEnumerator DestroyAfterLifeTime()
     {
         yield return new WaitForSeconds(LifeTime);
+        SelfDestruct();
+    }
+
+    protected virtual void OnCollisionEnter(Collision other)
+    {
+        other.gameObject.TryGetComponent<ITakeSpellData>(out var component);
+        if (other.transform == Caster) return;
+        component?.TakeSpellData(element, SpellType);
+        SelfDestruct();
+    }
+
+    protected void SelfDestruct()
+    {
+        activeParticlePrefab.transform.parent = null;
+        activeParticlePrefab.Stop(true, ParticleSystemStopBehavior.StopEmitting);
         Destroy(gameObject);
     }
 }

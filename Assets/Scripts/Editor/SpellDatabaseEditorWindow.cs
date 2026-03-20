@@ -424,7 +424,9 @@ public class SpellDatabaseEditorWindow : EditorWindow
 
         if (database.elements.Count == 0)
         {
-            elementsScrollView.Add(CreateEmptyState("No elements yet.\nUse Add New or drag an existing element asset into the field above."));
+            elementsScrollView.Add(
+                CreateEmptyState(
+                    "No elements yet.\nUse Add New or drag an existing element asset into the field above."));
             return;
         }
 
@@ -442,7 +444,8 @@ public class SpellDatabaseEditorWindow : EditorWindow
             return;
 
         spellTypesScrollView.Clear();
-        spellTypesHeaderLabel.text = database == null ? "Spell Types" : "Spell Types (" + database.spellTypes.Count + ")";
+        spellTypesHeaderLabel.text =
+            database == null ? "Spell Types" : "Spell Types (" + database.spellTypes.Count + ")";
 
         if (database == null)
         {
@@ -452,7 +455,8 @@ public class SpellDatabaseEditorWindow : EditorWindow
 
         if (database.spellTypes.Count == 0)
         {
-            spellTypesScrollView.Add(CreateEmptyState("No spell types yet.\nUse Add New or drag an existing spell type asset into the field above."));
+            spellTypesScrollView.Add(CreateEmptyState(
+                "No spell types yet.\nUse Add New or drag an existing spell type asset into the field above."));
             return;
         }
 
@@ -497,7 +501,7 @@ public class SpellDatabaseEditorWindow : EditorWindow
         for (int e = 0; e < database.elements.Count; e++)
         {
             SpellElementDefinition element = database.elements[e];
-            headerRow.Add(CreateMatrixHeaderCell(GetObjectName(element), MatrixCellWidth));
+            headerRow.Add(CreateMatrixHeaderCell(element.name, MatrixCellWidth));
         }
 
         matrixRoot.Add(headerRow);
@@ -508,7 +512,7 @@ public class SpellDatabaseEditorWindow : EditorWindow
 
             VisualElement row = new VisualElement();
             row.style.flexDirection = FlexDirection.Row;
-            row.Add(CreateMatrixHeaderCell(GetObjectName(spellType), MatrixHeaderWidth));
+            row.Add(CreateMatrixHeaderCell(spellType.name, MatrixHeaderWidth));
 
             for (int e = 0; e < database.elements.Count; e++)
             {
@@ -582,11 +586,14 @@ public class SpellDatabaseEditorWindow : EditorWindow
         }
 
         inspectorTitleLabel.text = "Element";
-        inspectorSubtitleLabel.text = GetObjectName(selectedElement);
+        inspectorSubtitleLabel.text = selectedElement.name;
 
-        inspectorActionsContainer.Add(CreateActionButton("Ping Asset", () => PingObject(selectedElement), ButtonStyleKind.Secondary));
-        inspectorActionsContainer.Add(CreateActionButton("Select Asset", () => SelectObject(selectedElement), ButtonStyleKind.Secondary));
-        inspectorActionsContainer.Add(CreateActionButton("Remove From Database", () => RemoveElement(selectedElement), ButtonStyleKind.Warning));
+        inspectorActionsContainer.Add(CreateActionButton("Ping Asset", () => PingObject(selectedElement),
+            ButtonStyleKind.Secondary));
+        inspectorActionsContainer.Add(CreateActionButton("Select Asset", () => SelectObject(selectedElement),
+            ButtonStyleKind.Secondary));
+        inspectorActionsContainer.Add(CreateActionButton("Remove From Database", () => RemoveElement(selectedElement),
+            ButtonStyleKind.Warning));
 
         inspectorMessageContainer.Add(CreateInfoBox("This tool uses the asset file name as the visible name."));
         inspectorContentContainer.Add(CreateAssetRenameBox(selectedElement));
@@ -603,11 +610,14 @@ public class SpellDatabaseEditorWindow : EditorWindow
         }
 
         inspectorTitleLabel.text = "Spell Type";
-        inspectorSubtitleLabel.text = GetObjectName(selectedSpellType);
+        inspectorSubtitleLabel.text = selectedSpellType.name;
 
-        inspectorActionsContainer.Add(CreateActionButton("Ping Asset", () => PingObject(selectedSpellType), ButtonStyleKind.Secondary));
-        inspectorActionsContainer.Add(CreateActionButton("Select Asset", () => SelectObject(selectedSpellType), ButtonStyleKind.Secondary));
-        inspectorActionsContainer.Add(CreateActionButton("Remove From Database", () => RemoveSpellType(selectedSpellType), ButtonStyleKind.Warning));
+        inspectorActionsContainer.Add(CreateActionButton("Ping Asset", () => PingObject(selectedSpellType),
+            ButtonStyleKind.Secondary));
+        inspectorActionsContainer.Add(CreateActionButton("Select Asset", () => SelectObject(selectedSpellType),
+            ButtonStyleKind.Secondary));
+        inspectorActionsContainer.Add(CreateActionButton("Remove From Database",
+            () => RemoveSpellType(selectedSpellType), ButtonStyleKind.Warning));
 
         inspectorMessageContainer.Add(CreateInfoBox("This tool uses the asset file name as the visible name."));
         inspectorContentContainer.Add(CreateAssetRenameBox(selectedSpellType));
@@ -626,15 +636,15 @@ public class SpellDatabaseEditorWindow : EditorWindow
         selectedCombo = database.GetCombo(selectedElement, selectedSpellType);
 
         inspectorTitleLabel.text = "Matrix Cell";
-        inspectorSubtitleLabel.text = GetObjectName(selectedSpellType) + " × " + GetObjectName(selectedElement);
+        inspectorSubtitleLabel.text = selectedSpellType.name + " × " + selectedElement.name;
 
         inspectorMessageContainer.Add(CreateInfoBox(
             "This cell represents one spell type + one element. " +
             "Names come from the asset file names."));
 
         VisualElement factsBox = CreateSubBox();
-        factsBox.Add(CreateKeyValueRow("Element", GetObjectName(selectedElement)));
-        factsBox.Add(CreateKeyValueRow("Spell Type", GetObjectName(selectedSpellType)));
+        factsBox.Add(CreateKeyValueRow("Element", selectedElement.name));
+        factsBox.Add(CreateKeyValueRow("Spell Type", selectedSpellType.name));
         factsBox.Add(CreateKeyValueRow("Status", selectedCombo == null ? "Empty" : "Assigned"));
         inspectorMessageContainer.Add(factsBox);
 
@@ -652,14 +662,18 @@ public class SpellDatabaseEditorWindow : EditorWindow
 
         if (selectedCombo == null)
         {
-            inspectorActionsContainer.Add(CreateActionButton("Create New Combo", CreateComboForSelectedCell, ButtonStyleKind.Primary));
+            inspectorActionsContainer.Add(CreateActionButton("Create New Combo", CreateComboForSelectedCell,
+                ButtonStyleKind.Primary));
             inspectorContentContainer.Add(CreateEmptyState("No combo assigned to this cell."));
             return;
         }
 
-        inspectorActionsContainer.Add(CreateActionButton("Create New Combo", CreateComboForSelectedCell, ButtonStyleKind.Primary));
-        inspectorActionsContainer.Add(CreateActionButton("Ping Asset", () => PingObject(selectedCombo), ButtonStyleKind.Secondary));
-        inspectorActionsContainer.Add(CreateActionButton("Select Asset", () => SelectObject(selectedCombo), ButtonStyleKind.Secondary));
+        inspectorActionsContainer.Add(CreateActionButton("Create New Combo", CreateComboForSelectedCell,
+            ButtonStyleKind.Primary));
+        inspectorActionsContainer.Add(CreateActionButton("Ping Asset", () => PingObject(selectedCombo),
+            ButtonStyleKind.Secondary));
+        inspectorActionsContainer.Add(CreateActionButton("Select Asset", () => SelectObject(selectedCombo),
+            ButtonStyleKind.Secondary));
         inspectorActionsContainer.Add(CreateActionButton("Clear Link", ClearSelectedCell, ButtonStyleKind.Warning));
 
         if (selectedCombo.element != selectedElement || selectedCombo.spellType != selectedSpellType)
@@ -703,7 +717,7 @@ public class SpellDatabaseEditorWindow : EditorWindow
         swatch.style.backgroundColor = element != null ? element.elementColor : new Color(0.4f, 0.1f, 0.1f);
 
         Button selectButton = new Button(() => SelectElement(element));
-        selectButton.text = GetObjectName(element);
+        selectButton.text = element.name;
         selectButton.style.flexGrow = 1f;
         StyleListSelectButton(selectButton, isSelected);
 
@@ -729,7 +743,7 @@ public class SpellDatabaseEditorWindow : EditorWindow
         prefix.style.color = new Color(0.85f, 0.85f, 0.85f);
 
         Button selectButton = new Button(() => SelectSpellType(spellType));
-        selectButton.text = GetObjectName(spellType);
+        selectButton.text = spellType.name;
         selectButton.style.flexGrow = 1f;
         StyleListSelectButton(selectButton, isSelected);
 
@@ -1025,7 +1039,8 @@ public class SpellDatabaseEditorWindow : EditorWindow
 
     private void CreateComboForSelectedCell()
     {
-        if (database == null || selectionKind != SelectionKind.Cell || selectedElement == null || selectedSpellType == null)
+        if (database == null || selectionKind != SelectionKind.Cell || selectedElement == null ||
+            selectedSpellType == null)
             return;
 
         SpellComboDefinition combo = CreateNewComboAsset(selectedElement, selectedSpellType);
@@ -1036,7 +1051,7 @@ public class SpellDatabaseEditorWindow : EditorWindow
     {
         string folder = EnsureFolder(DefaultComboFolder);
         string comboAssetName = GetSuggestedComboAssetName(element, spellType);
-        string path = AssetDatabase.GenerateUniqueAssetPath(folder +  comboAssetName);
+        string path = AssetDatabase.GenerateUniqueAssetPath(folder + comboAssetName);
 
         SpellComboDefinition combo = CreateInstance<SpellComboDefinition>();
         combo.element = element;
@@ -1052,7 +1067,8 @@ public class SpellDatabaseEditorWindow : EditorWindow
 
     private void AssignComboToSelectedCell(SpellComboDefinition combo)
     {
-        if (database == null || selectionKind != SelectionKind.Cell || selectedElement == null || selectedSpellType == null)
+        if (database == null || selectionKind != SelectionKind.Cell || selectedElement == null ||
+            selectedSpellType == null)
             return;
 
         Undo.RecordObject(database, "Assign Spell Combo");
@@ -1086,7 +1102,8 @@ public class SpellDatabaseEditorWindow : EditorWindow
 
     private void ClearSelectedCell()
     {
-        if (database == null || selectionKind != SelectionKind.Cell || selectedElement == null || selectedSpellType == null)
+        if (database == null || selectionKind != SelectionKind.Cell || selectedElement == null ||
+            selectedSpellType == null)
             return;
 
         Undo.RecordObject(database, "Clear Spell Combo Link");
@@ -1187,33 +1204,24 @@ public class SpellDatabaseEditorWindow : EditorWindow
 
     private void RenameAssetSilently(Object targetObject, string newName)
     {
-        if (targetObject == null)
+        if (!targetObject)
             return;
 
         string path = AssetDatabase.GetAssetPath(targetObject);
         if (string.IsNullOrWhiteSpace(path))
             return;
 
-        string sanitizedName = SanitizeAssetName(newName);
-        if (string.IsNullOrWhiteSpace(sanitizedName))
+        if (targetObject.name == newName)
             return;
 
-        if (targetObject.name == sanitizedName)
-            return;
-
-        AssetDatabase.RenameAsset(path, sanitizedName);
+        AssetDatabase.RenameAsset(path, newName);
     }
 
     private string GetSuggestedComboAssetName(SpellElementDefinition element, SpellTypeDefinition spellType)
     {
-        string elementName = SanitizeAssetName(GetObjectName(element));
-        string spellTypeName = SanitizeAssetName(GetObjectName(spellType));
-        return "Combo"+ elementName + "_" + spellTypeName + ".asset";
-    }
-
-    private string GetObjectName(Object obj)
-    {
-        return obj != null ? obj.name : "Missing";
+        string elementName = element.name;
+        string spellTypeName = spellType.name;
+        return "Combo" + elementName + "_" + spellTypeName + ".asset";
     }
 
     private void SelectObject(Object obj)
@@ -1265,24 +1273,6 @@ public class SpellDatabaseEditorWindow : EditorWindow
         return (a + "/" + b).Replace("\\", "/");
     }
 
-    private string SanitizeAssetName(string value)
-    {
-        string sanitized = string.IsNullOrWhiteSpace(value) ? "Unnamed" : value.Trim();
-
-        foreach (char c in Path.GetInvalidFileNameChars())
-        {
-            sanitized = sanitized.Replace(c.ToString(), string.Empty);
-        }
-
-        sanitized = sanitized.Replace(".", "_");
-        sanitized = sanitized.Replace("/", "_");
-        sanitized = sanitized.Replace("\\", "_");
-
-        if (string.IsNullOrWhiteSpace(sanitized))
-            sanitized = "Unnamed";
-
-        return sanitized;
-    }
 
     private VisualElement CreatePanel()
     {

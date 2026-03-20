@@ -1,7 +1,6 @@
 using UnityEngine;
 
-namespace ScriptsMilana
-{
+
     [CreateAssetMenu(fileName = "EnemyData", menuName = "Game/EnemyData")]
     public class EnemyData : ScriptableObject
     {
@@ -19,4 +18,4 @@ namespace ScriptsMilana
         [Header("References")]
         public GameObject projectilePrefab;
     }
-}
+

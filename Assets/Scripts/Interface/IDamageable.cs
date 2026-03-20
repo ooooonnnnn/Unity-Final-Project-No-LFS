@@ -1,4 +1,4 @@
-namespace ScriptsMilana
+namespace Interface
 {
     public interface IDamageable
     {

@@ -1,10 +1,11 @@
 using System;
-using ScriptsMilana;
-using UnityEngine;
 
-[Serializable]
-public class WaveEntry
+namespace Wave
 {
-    public WaveData waveData;
-    public float duration; 
+    [Serializable]
+    public class WaveEntry
+    {
+        public WaveData waveData;
+        public float duration; 
+    }
 }

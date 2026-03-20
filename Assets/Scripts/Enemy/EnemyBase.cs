@@ -1,8 +1,9 @@
+using Enemy;
+using Interface;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace ScriptsMilana
-{
+
     public class EnemyBase : MonoBehaviour
     {
         [SerializeField] private EnemyData data;
@@ -153,4 +154,3 @@ namespace ScriptsMilana
             gameObject.SetActive(false);
         }
     }
-}

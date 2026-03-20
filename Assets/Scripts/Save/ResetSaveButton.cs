@@ -1,10 +1,12 @@
-using ScriptsMilana;
 using UnityEngine;
 
-public class ResetSaveButton : MonoBehaviour
+namespace Save
 {
-    public void ResetSave()
+    public class ResetSaveButton : MonoBehaviour
     {
-        SaveSystem.ResetSave();
+        public void ResetSave()
+        {
+            SaveSystem.ResetSave();
+        }
     }
 }

@@ -1,6 +1,7 @@
+using Interface;
 using UnityEngine;
 
-namespace ScriptsMilana
+namespace Extra
 {
     public class PlayerHealth : MonoBehaviour, IDamageable
     {

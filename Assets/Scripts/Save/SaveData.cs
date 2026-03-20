@@ -1,6 +1,6 @@
 using System;
 
-namespace ScriptsMilana
+namespace Save
 {
     [Serializable]
     public class SaveData

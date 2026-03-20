@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ScriptsMilana
+namespace Wave
 {
     [CreateAssetMenu(fileName = "WaveData", menuName = "Game/WaveData")]
     public class WaveData : ScriptableObject

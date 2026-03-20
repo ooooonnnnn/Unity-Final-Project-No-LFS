@@ -1,33 +1,36 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LevelManager : MonoBehaviour
+namespace Level
 {
-    public static LevelManager Instance;
-
-    public int CurrentLevelIndex { get; private set; }
-
-    private void Awake()
+    public class LevelManager : MonoBehaviour
     {
-        if (Instance != null)
+        public static LevelManager Instance;
+
+        public int CurrentLevelIndex { get; private set; }
+
+        private void Awake()
         {
-            Destroy(gameObject);
-            return;
+            if (Instance != null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
 
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
+        public void LoadLevel(int levelIndex)
+        {
+            CurrentLevelIndex = levelIndex;
 
-    public void LoadLevel(int levelIndex)
-    {
-        CurrentLevelIndex = levelIndex;
-
-        SceneManager.LoadScene("EnemyScene");
-    }
+            SceneManager.LoadScene("EnemyScene");
+        }
     
-    public void ReturnToLevelSelect()
-    {
-        SceneManager.LoadScene("LevelSelect");
+        public void ReturnToLevelSelect()
+        {
+            SceneManager.LoadScene("LevelSelect");
+        }
     }
 }

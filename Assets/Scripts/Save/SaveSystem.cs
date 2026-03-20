@@ -1,7 +1,7 @@
 using System.IO;
 using UnityEngine;
 
-namespace ScriptsMilana
+namespace Save
 {
     public static class SaveSystem
     {

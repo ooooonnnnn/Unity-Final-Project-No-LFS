@@ -1,64 +1,68 @@
-using ScriptsMilana;
+using Interface;
+using Spells.EditorTool;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour, ISpellable
+namespace Extra
 {
-    private SpellComboDefinition _combo;
-    private Transform _target;
-    private float _speed;
-    private float _damage;
-
-    private Transform _transform;
-
-    private void Awake()
+    public class Projectile : MonoBehaviour, ISpellable
     {
-        _transform = transform;
-    }
+        private SpellComboDefinition _combo;
+        private Transform _target;
+        private float _speed;
+        private float _damage;
 
-    public void Initialize(SpellComboDefinition combo, Transform caster, Transform target)
-    {
-        _combo = combo;
-        _target = target;
-        _speed = combo.speed;
-        _damage = combo.powerMultiplier;
+        private Transform _transform;
+
+        private void Awake()
+        {
+            _transform = transform;
+        }
+
+        public void Initialize(SpellComboDefinition combo, Transform caster, Transform target)
+        {
+            _combo = combo;
+            _target = target;
+            _speed = combo.speed;
+            _damage = combo.powerMultiplier;
         
-        if (_target)
-        {
-            Vector3 dir = (_target.position - _transform.position).normalized;
-            _transform.forward = dir;
+            if (_target)
+            {
+                Vector3 dir = (_target.position - _transform.position).normalized;
+                _transform.forward = dir;
+            }
         }
-    }
-    private void Update()
-    {
-        if (!_target)
+        private void Update()
         {
-            Destroy(gameObject);
-            return;
+            if (!_target)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            Vector3 direction = (_target.position - _transform.position).normalized;
+            _transform.position += direction * (_speed * Time.deltaTime);
         }
 
-        Vector3 direction = (_target.position - _transform.position).normalized;
-        _transform.position += direction * (_speed * Time.deltaTime);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (_target == null)
-            return;
-
-        if (other.transform != _target)
-            return;
-
-        if (other.TryGetComponent<IDamageable>(out var damageable))
+        private void OnTriggerEnter(Collider other)
         {
-            damageable.TakeDamage(_damage);
+            if (_target == null)
+                return;
+
+            if (other.transform != _target)
+                return;
+
+            if (other.TryGetComponent<IDamageable>(out var damageable))
+            {
+                damageable.TakeDamage(_damage);
             
-            if (_combo.appliesBurn)
-                Debug.Log("Apply Burn");
+                if (_combo.appliesBurn)
+                    Debug.Log("Apply Burn");
 
-            if (_combo.appliesFreeze)
-                Debug.Log("Apply Freeze");
+                if (_combo.appliesFreeze)
+                    Debug.Log("Apply Freeze");
+            }
+
+            ProjectilePool.Instance.Return(_combo.prefab, gameObject);
         }
-
-        ProjectilePool.Instance.Return(_combo.prefab, gameObject);
     }
 }

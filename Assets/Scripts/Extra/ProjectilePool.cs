@@ -1,45 +1,48 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectilePool : MonoBehaviour
+namespace Extra
 {
-    public static ProjectilePool Instance;
-
-    private Dictionary<GameObject, Queue<GameObject>> pool = new();
-
-    private void Awake()
+    public class ProjectilePool : MonoBehaviour
     {
-        Instance = this;
-    }
+        public static ProjectilePool Instance;
 
-    public GameObject Get(GameObject prefab)
-    {
-        if (!pool.ContainsKey(prefab))
+        private Dictionary<GameObject, Queue<GameObject>> pool = new();
+
+        private void Awake()
         {
-            pool[prefab] = new Queue<GameObject>();
+            Instance = this;
         }
 
-        var queue = pool[prefab];
-
-        if (queue.Count > 0)
+        public GameObject Get(GameObject prefab)
         {
-            GameObject obj = queue.Dequeue();
-            obj.SetActive(true);
-            return obj;
+            if (!pool.ContainsKey(prefab))
+            {
+                pool[prefab] = new Queue<GameObject>();
+            }
+
+            var queue = pool[prefab];
+
+            if (queue.Count > 0)
+            {
+                GameObject obj = queue.Dequeue();
+                obj.SetActive(true);
+                return obj;
+            }
+
+            return Instantiate(prefab);
         }
 
-        return Instantiate(prefab);
-    }
-
-    public void Return(GameObject prefab, GameObject obj)
-    {
-        obj.SetActive(false);
-
-        if (!pool.ContainsKey(prefab))
+        public void Return(GameObject prefab, GameObject obj)
         {
-            pool[prefab] = new Queue<GameObject>();
-        }
+            obj.SetActive(false);
 
-        pool[prefab].Enqueue(obj);
+            if (!pool.ContainsKey(prefab))
+            {
+                pool[prefab] = new Queue<GameObject>();
+            }
+
+            pool[prefab].Enqueue(obj);
+        }
     }
 }

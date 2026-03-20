@@ -1,9 +1,12 @@
 using UnityEngine;
 
-public class LevelCompleteUI : MonoBehaviour
+namespace Level
 {
-    public void ReturnToLevelSelect()
+    public class LevelCompleteUI : MonoBehaviour
     {
-        LevelManager.Instance.ReturnToLevelSelect();
+        public void ReturnToLevelSelect()
+        {
+            LevelManager.Instance.ReturnToLevelSelect();
+        }
     }
 }

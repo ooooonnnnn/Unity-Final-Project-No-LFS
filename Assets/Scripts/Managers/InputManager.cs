@@ -1,56 +1,58 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class InputManager : MonoBehaviour
+namespace Managers
 {
-    public static InputManager Instance { get; private set; }
+    public class InputManager : MonoBehaviour
+    {
+        public static InputManager Instance { get; private set; }
     
-    private InputSystem_Actions actions;
-    public UnityEvent OnInteract;
-    public UnityEvent<Vector2> OnMove;
-    public UnityEvent<float> OnZoom;
-    public UnityEvent<int> OnSelectCharacter;
-    public UnityEvent OnRecenter;
-    public UnityEvent OnRightClick;
-    public UnityEvent OnWave;
-    public UnityEvent OnReset;
-    private void Awake()
-    {
-        Instance = this;
+        private InputSystem_Actions actions;
+        public UnityEvent OnInteract;
+        public UnityEvent<Vector2> OnMove;
+        public UnityEvent<float> OnZoom;
+        public UnityEvent<int> OnSelectCharacter;
+        public UnityEvent OnRecenter;
+        public UnityEvent OnRightClick;
+        public UnityEvent OnWave;
+        public UnityEvent OnReset;
+        private void Awake()
+        {
+            Instance = this;
         
-        actions = new InputSystem_Actions();
+            actions = new InputSystem_Actions();
         
-        actions.Player.Interact.performed += _ => OnInteract?.Invoke();
-        actions.Player.Move.performed += ctx => OnMove?.Invoke(ctx.ReadValue<Vector2>());
-        actions.Player.Zoom.performed += ctx => OnZoom?.Invoke(ctx.ReadValue<float>());
-        actions.Player.SelectCharacter.performed += ctx => OnSelectCharacter?.Invoke((int)ctx.ReadValue<float>());
-        actions.Player.Recenter.performed += _ => OnRecenter?.Invoke();
-        actions.Player.RightClick.performed += _ => OnRightClick?.Invoke();
-        actions.Player.Wave.performed += _ => OnWave?.Invoke();
-        actions.Player.Reset.performed += _ => OnReset?.Invoke();
+            actions.Player.Interact.performed += _ => OnInteract?.Invoke();
+            actions.Player.Move.performed += ctx => OnMove?.Invoke(ctx.ReadValue<Vector2>());
+            actions.Player.Zoom.performed += ctx => OnZoom?.Invoke(ctx.ReadValue<float>());
+            actions.Player.SelectCharacter.performed += ctx => OnSelectCharacter?.Invoke((int)ctx.ReadValue<float>());
+            actions.Player.Recenter.performed += _ => OnRecenter?.Invoke();
+            actions.Player.RightClick.performed += _ => OnRightClick?.Invoke();
+            actions.Player.Wave.performed += _ => OnWave?.Invoke();
+            actions.Player.Reset.performed += _ => OnReset?.Invoke();
         
-        // OnSelectCharacter.AddListener(num => print(num));
-        // OnMove.AddListener(vec => print(vec));
-        // OnRightClick.AddListener(() => print("Right Click"));
-    }
+            // OnSelectCharacter.AddListener(num => print(num));
+            // OnMove.AddListener(vec => print(vec));
+            // OnRightClick.AddListener(() => print("Right Click"));
+        }
 
-    // private void OnDestroy()
-    // {
-    //     OnInteract = null;
-    //     OnMove = null;
-    //     OnZoom = null;
-    //     OnSelectCharacter = null; 
-    //     OnRecenter = null;
-    // }
+        // private void OnDestroy()
+        // {
+        //     OnInteract = null;
+        //     OnMove = null;
+        //     OnZoom = null;
+        //     OnSelectCharacter = null; 
+        //     OnRecenter = null;
+        // }
 
-    private void OnEnable()
-    {
-        actions.Enable();
-    }
+        private void OnEnable()
+        {
+            actions.Enable();
+        }
     
-    private void OnDisable()
-    {
-        actions.Disable();
+        private void OnDisable()
+        {
+            actions.Disable();
+        }
     }
 }

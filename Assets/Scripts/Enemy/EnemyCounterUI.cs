@@ -1,8 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace ScriptsMilana
-{
+
     public class EnemyCounterUI : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI enemyCountText;
@@ -22,4 +21,3 @@ namespace ScriptsMilana
             enemyCountText.text = $"Enemies Alive: {alive}\nSpawned: {spawnedSoFar}/{totalInWave}";
         }
     }
-}

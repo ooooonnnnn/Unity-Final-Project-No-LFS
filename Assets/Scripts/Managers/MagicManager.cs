@@ -24,7 +24,7 @@ public class MagicManager : MonoBehaviour
         var indexBestElem = scores.Take(numElements).ToList().MaxIndex(out var bestElemScore);
         var indexBestType = scores.Skip(numElements).Take(numTypes).ToList().MaxIndex(out var bestTypeScore);
 
-        element = bestElemScore > classificationThreshold ? spellDatabase.elements[indexBestElem].element : null;
+        element = bestElemScore > classificationThreshold ? spellDatabase.elements[indexBestElem].elementEnum : null;
         type = bestTypeScore > classificationThreshold ? spellDatabase.spellTypes[indexBestType].deliveryCategory : null;
     }
 }

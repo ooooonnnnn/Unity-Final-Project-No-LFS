@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 8520818316116910619}
   - component: {fileID: -3834119316503094813}
   - component: {fileID: 7298519220855563000}
-  - component: {fileID: 2927321662177643298}
+  - component: {fileID: 3474430443314875223}
   m_Layer: 0
   m_Name: GoblinEnemy
   m_TagString: Untagged
@@ -210,8 +210,9 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 9955918c32424684a91963c146859235, type: 2}
   firePoint: {fileID: 6931553641183035368}
   animator: {fileID: 8222610118477038597}
-  spellExecutor: {fileID: 2927321662177643298}
---- !u!114 &2927321662177643298
+  spellCaster: {fileID: 3474430443314875223}
+  combo: {fileID: 11400000, guid: 60ada02ef900e6b489c4dcff3a6e5da7, type: 2}
+--- !u!114 &3474430443314875223
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -220,10 +221,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 8477810394355442602}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16b1c1179143f764da9f3bde237099fe, type: 3}
+  m_Script: {fileID: 11500000, guid: 89b68e55e16b1964f823326790c2c563, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemySpellExecutor
-  spellCombo: {fileID: 11400000, guid: 0223e050c3de85242b9b534769a35660, type: 2}
+  m_EditorClassIdentifier: Assembly-CSharp::SpellCaster
+  projectilePrefab: {fileID: 2433654135293210166, guid: 713bb4c166b081449b4d9b76b9414f06, type: 3}
+  strikePrefab: {fileID: 6810343919242758281, guid: e5d640c8806a1a347b386e684d084a70, type: 3}
+  spellCombos:
+  - {fileID: 11400000, guid: 60ada02ef900e6b489c4dcff3a6e5da7, type: 2}
 --- !u!1 &9019235314706636387
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,7 +9,8 @@ namespace Enemy
         [SerializeField] private float attackRate = 1f;
         [SerializeField] private float attackRange = 1.5f;
         [SerializeField] private Animator animator;
-        [SerializeField] private EnemySpellExecutor spellExecutor;
+        [SerializeField] private SpellCaster spellCaster;
+        [SerializeField] private SpellComboDefinition combo;
 
         private Transform _target;
         private Transform _owner;
@@ -51,13 +52,10 @@ namespace Enemy
         {
             animator.SetTrigger(AttackHash);
 
-            if (!spellExecutor)
+            if (spellCaster)
             {
-                Debug.LogWarning($"{name}: No EnemySpellExecutor assigned.");
-                return;
+                spellCaster.CastSpell(); 
             }
-
-            spellExecutor.Execute(_owner, _target);
         }
     }
 }

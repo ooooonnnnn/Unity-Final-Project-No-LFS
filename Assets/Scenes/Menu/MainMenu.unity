@@ -258,7 +258,7 @@ MonoBehaviour:
   m_text: PLAY
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e298254f0876c4842a7c3bf70a03d266, type: 2}
-  m_sharedMaterial: {fileID: 8247375580739060999, guid: e298254f0876c4842a7c3bf70a03d266, type: 2}
+  m_sharedMaterial: {fileID: -1555449580628691896, guid: e298254f0876c4842a7c3bf70a03d266, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -609,6 +609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Level.LevelButton
   levelIndex: 0
+  levelScene: {fileID: 0}
   button: {fileID: 717792985}
   lockIcon: {fileID: 0}
   hoverScale: 1.1

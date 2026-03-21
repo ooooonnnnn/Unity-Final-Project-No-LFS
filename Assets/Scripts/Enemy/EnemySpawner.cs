@@ -64,6 +64,12 @@ using Random = UnityEngine.Random;
 
                 while (waitingForWaveEnd)
                 {
+                    if (enemiesAlive <= 0)
+                    {
+                        waitingForWaveEnd = false;
+                        break;
+                    }
+
                     yield return null;
                 }
 

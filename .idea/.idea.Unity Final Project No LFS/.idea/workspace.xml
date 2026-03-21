@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d970d391-96e8-4218-bb59-ebfcb9d42cbf" name="Changes" comment="" />
+    <list default="true" id="d970d391-96e8-4218-bb59-ebfcb9d42cbf" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Unity Final Project No LFS/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Unity Final Project No LFS/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/MagicManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/MagicManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Spells/EditorTool/SpellElementDefinition.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Spells/EditorTool/SpellElementDefinition.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Spells/EditorTool/SpellTypeDefinition.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Spells/EditorTool/SpellTypeDefinition.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Spells/SpellBehavior/ProjectileBehavior.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Spells/SpellBehavior/ProjectileBehavior.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,10 +27,10 @@
     <commands />
     <urls />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="3BFYLxqOq7MFzg32hzPUgf0rSmh" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -38,7 +44,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "level-design",
+    "git-widget-placeholder": "missing-scripts",
     "junie.onboarding.icon.badge.shown": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",

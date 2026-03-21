@@ -1,9 +1,6 @@
-using Extra;
-using Interface;
 using UnityEngine;
 
-namespace Enemy
-{
+
     public class EnemySpellExecutor : MonoBehaviour
     {
         [SerializeField] private SpellComboDefinition spellCombo;
@@ -35,5 +32,5 @@ namespace Enemy
         }
 
      }
-}
+
 

@@ -8,12 +8,12 @@ using UnityEngine;
 
         private void OnEnable()
         {
-            EnemySpawner.OnEnemyCountChanged += UpdateEnemyCount;
+            EnemySpawner.Instance.OnEnemyCountChanged += UpdateEnemyCount;
         }
 
         private void OnDisable()
         {
-            EnemySpawner.OnEnemyCountChanged -= UpdateEnemyCount;
+            EnemySpawner.Instance.OnEnemyCountChanged -= UpdateEnemyCount;
         }
 
         private void UpdateEnemyCount(int alive, int spawnedSoFar, int totalInWave)

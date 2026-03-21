@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Extra
-{
     public class ProjectilePool : MonoBehaviour
     {
         public static ProjectilePool Instance;
@@ -45,4 +43,3 @@ namespace Extra
             pool[prefab].Enqueue(obj);
         }
     }
-}

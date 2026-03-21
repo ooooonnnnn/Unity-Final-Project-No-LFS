@@ -1,7 +1,5 @@
 using UnityEngine;
 
-namespace Knockback
-{
     public class KnockbackAnimatorDriver : MonoBehaviour
     {
         [SerializeField] private Animator animator;
@@ -34,4 +32,3 @@ namespace Knockback
             animator.SetTrigger(KB_Trigger);
         }
     }
-}

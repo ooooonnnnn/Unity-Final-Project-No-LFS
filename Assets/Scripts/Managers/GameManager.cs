@@ -1,89 +1,73 @@
-using System.Collections.Generic;
-using Camera;
 using UnityEngine;
 
-namespace Managers
+
+public class GameManager : MonoBehaviour
 {
-    public class GameManager : MonoBehaviour
+    public static GameManager Instance { get; private set; }
+    public GameObject spawnPoint;
+
+    [SerializeField] private InputManager inputManager;
+    [SerializeField] private LevelManager levelManager;
+    [SerializeField] private UIManager uiManager;
+
+
+    private EnemySpawner enemySpawner;
+    private PlayerController player;
+
+    private void Awake()
     {
-        public static GameManager Instance { get; private set; }
-        public GameObject spawnPoint;
-    
-        [SerializeField] private MultiCharacterController characterController;
-        [SerializeField] private InputManager inputManager;
-        [SerializeField] private string resetPromptMessage = "Press R to reset the selected character.";
-    
-
-        private readonly HashSet<CharacterComponents> charactersInResetZone = new();
-        private CharacterComponents selectedCharacter;
-        private bool promptShown;
-
-
-        private void Awake()
+        if (Instance && Instance != this)
         {
-            if (Instance && Instance != this)
-            {
-                Destroy(gameObject);
-                return;
-            }
+            Destroy(gameObject);
+            return;
+        }
 
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+        Instance = this;
         
-        }
+        SaveSystem.Load();
+        
+        DontDestroyOnLoad(gameObject);
+    }
 
-        private void OnEnable()
-        {
-            characterController.OnCharacterChange.AddListener(HandleCharacterChange);
+    private void OnEnable()
+    {
+        levelManager.OnLevelLoaded += LoadLevelData;
+    }
 
-            inputManager.OnReset.AddListener(HandleReset);
-        }
+    private void OnDisable()
+    {
+        levelManager.OnLevelLoaded -= LoadLevelData;
+    }
 
-        private void OnDisable()
-        {
-            if (characterController)
-                characterController.OnCharacterChange.RemoveListener(HandleCharacterChange);
-            if (inputManager)
-                inputManager.OnReset.RemoveListener(HandleReset);
-        }
+    private void Start()
+    {
+        Debug.Log("Game started, current level: " + levelManager.CurrentLevelName);
+        
+        
+        
+        
+    }
 
-        private void Start()
-        {
-            selectedCharacter = characterController.CurrentCharacter;
-            UpdateResetPrompt();
-        }
-        private void HandleCharacterChange(CharacterComponents character)
-        {
-            selectedCharacter = character;
-            UpdateResetPrompt();
-        }
+    private void LoadLevelData()
+    {
+        player = PlayerController.Instance;
+        player.OnPlayerDied += GameLost;
+        enemySpawner = EnemySpawner.Instance;
+        enemySpawner.OnWaveCompleted += LevelWon;
+    }
 
-        private void HandleReset()
-        {
-            if (!selectedCharacter)
-                return;
+    private void LevelWon()
+    {
+        SaveSystem.UnlockNextLevel(levelManager.CurrentLevelIndex);
+        uiManager.LevelWon();
+    }
 
-            if (!charactersInResetZone.Contains(selectedCharacter))
-                return;
+    private void GameLost()
+    {
+    }
 
-   
-            UIManager.Instance.LogMessage($"{selectedCharacter.gameObject.name} reset to start.");
-        }
-
-        private void UpdateResetPrompt()
-        {
-            if (selectedCharacter && charactersInResetZone.Contains(selectedCharacter))
-            {
-                if (!promptShown)
-                {
-                    UIManager.Instance.LogMessage(resetPromptMessage);
-                    promptShown = true;
-                }
-            }
-            else
-            {
-                promptShown = false;
-            }
-        }
+    public void LoadLevel(int levelIndex)
+    {
+        throw new System.NotImplementedException();
     }
 }

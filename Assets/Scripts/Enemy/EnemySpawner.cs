@@ -1,18 +1,17 @@
 using System;
 using System.Collections;
-using Level;
-using Save;
 using UnityEngine;
-using Wave;
 using Random = UnityEngine.Random;
 
 
     public class EnemySpawner : MonoBehaviour
     {
         [SerializeField] private LevelData waves;
+        public static EnemySpawner Instance { get; private set; }
+
+        [SerializeField] private LevelData[] levels;
         [SerializeField] private Transform[] spawnPoints;
         [SerializeField] private Transform playerTarget;
-        [SerializeField] private GameObject levelCompleteUI;
 
         private int enemiesSpawned;
         private int enemiesAlive;
@@ -20,19 +19,28 @@ using Random = UnityEngine.Random;
         private bool waitingForWaveEnd;
         
         
+        public event Action<float> OnWaveDelayStarted;
         
+        public  event Action<float> OnWaveDelayUpdated;
         
-        public static event Action<float> OnWaveDelayStarted;
-        
-        public static event Action<float> OnWaveDelayUpdated;
-        
-        public static event Action OnWaveCompleted;
+        public event Action OnWaveCompleted;
     
-        public static event Action<int, int, int> OnEnemyCountChanged; // for the ui
+        public event Action<int, int, int> OnEnemyCountChanged; // for the ui
     
         public int EnemiesAlive => enemiesAlive;
         public int EnemiesSpawned => enemiesSpawned;
         public int TotalEnemies => wave.totalEnemies;
+
+        private void Awake()
+        {
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            Instance = this;
+        }
 
         private void Start()
         {
@@ -150,12 +158,15 @@ using Random = UnityEngine.Random;
         {
             OnEnemyCountChanged?.Invoke(enemiesAlive, enemiesSpawned, wave.totalEnemies);
         }
+        
         private void HandleLevelComplete()
         {
-            int levelIndex = LevelManager.Instance.CurrentLevelIndex;
-
-            SaveSystem.UnlockNextLevel(levelIndex);
-
-            levelCompleteUI.SetActive(true);
+            
+            
+            // int levelIndex = LevelManager.Instance.CurrentLevelIndex;
+            //
+            // SaveSystem.UnlockNextLevel(levelIndex);
+            //
+            // levelCompleteUI.SetActive(true);
         }
     }

@@ -1,7 +1,6 @@
 using UnityEngine;
 
-namespace Knockback
-{
+
     public class KnockbackReset : StateMachineBehaviour
     {
         private static readonly int KB_Trigger = Animator.StringToHash("KB_Trigger");
@@ -18,4 +17,4 @@ namespace Knockback
             animator.SetFloat(KB_Speed, 1f);
         }
     }
-}
+

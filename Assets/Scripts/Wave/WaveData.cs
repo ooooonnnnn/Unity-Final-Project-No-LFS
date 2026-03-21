@@ -1,7 +1,6 @@
 using UnityEngine;
 
-namespace Wave
-{
+
     [CreateAssetMenu(fileName = "WaveData", menuName = "Game/WaveData")]
     public class WaveData : ScriptableObject
     {
@@ -14,4 +13,3 @@ namespace Wave
         public float spawnInterval = 2f;
         public float delayAfterWave = 10f;
     }
-}

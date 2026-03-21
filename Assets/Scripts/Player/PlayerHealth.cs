@@ -1,8 +1,7 @@
 using Interface;
 using UnityEngine;
 
-namespace Extra
-{
+
     public class PlayerHealth : MonoBehaviour, IDamageable
     {
         public float health = 100;
@@ -13,4 +12,3 @@ namespace Extra
             Debug.Log("Player hit. HP: " + health);
         }
     }
-}

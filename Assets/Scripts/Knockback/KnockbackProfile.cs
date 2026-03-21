@@ -1,7 +1,6 @@
 using UnityEngine;
 
-namespace Knockback
-{
+
     [CreateAssetMenu(
         fileName = "KnockbackProfile",
         menuName = "Combat/Knockback Profile"
@@ -37,4 +36,3 @@ namespace Knockback
     
     
     }
-}

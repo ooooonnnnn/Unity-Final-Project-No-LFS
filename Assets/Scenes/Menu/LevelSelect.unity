@@ -586,8 +586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a6aebeb0095a9f43810196ba394b175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelButton
-  levelIndex: 0
-  levelScene: {fileID: 102900000, guid: 44c3bd76813bbe641b68c1f44047ed61, type: 3}
+  levelIndex: 2
   button: {fileID: 417349253}
   lockIcon: {fileID: 787194361}
   hoverScale: 1.1
@@ -1300,8 +1299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a6aebeb0095a9f43810196ba394b175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelButton
-  levelIndex: 1
-  levelScene: {fileID: 102900000, guid: 64be6a0a0c04d1144b0401be1503f3a1, type: 3}
+  levelIndex: 3
   button: {fileID: 1472605566}
   lockIcon: {fileID: 35167358}
   hoverScale: 1.1
@@ -1452,8 +1450,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a6aebeb0095a9f43810196ba394b175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelButton
-  levelIndex: 2
-  levelScene: {fileID: 102900000, guid: e40650822142603429980d71f37b702c, type: 3}
+  levelIndex: 3
   button: {fileID: 1549672293}
   lockIcon: {fileID: 778125112}
   hoverScale: 1.1

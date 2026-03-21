@@ -1,17 +1,13 @@
-using Save;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using DG.Tweening;
-using UnityEditor;
 
-namespace Level
-{
-    public class LevelButton : MonoBehaviour , IPointerEnterHandler, IPointerExitHandler
+
+public class LevelButton : MonoBehaviour , IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] private int levelIndex;
-        [SerializeField] private SceneAsset levelScene;
         [SerializeField] private Button button;
         [SerializeField] private Image lockIcon;
         
@@ -46,7 +42,9 @@ namespace Level
 
         public void LoadLevel()
         {
-            LevelManager.Instance.LoadLevel(levelIndex, levelScene);
+            SaveSystem.Load();
+            GameManager.Instance.LoadLevel(levelIndex);
+            
         }
         
         public void OnPlayClicked()
@@ -75,4 +73,3 @@ namespace Level
                 .SetEase(Ease.OutQuad);
         }
     }
-}

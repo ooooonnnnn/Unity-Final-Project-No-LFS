@@ -1,8 +1,7 @@
 using Unity.Cinemachine;
 using UnityEngine;
 
-namespace Camera
-{
+
     public class OmriRTSCamera : MonoBehaviour
     {
         [Header("Cinemachine")]
@@ -59,4 +58,3 @@ namespace Camera
             followTarget = character.cameraFollowTarget;
         }
     }
-}

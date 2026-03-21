@@ -547,8 +547,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 717792988}
-        m_TargetAssemblyTypeName: Level.LevelButton, Assembly-CSharp
-        m_MethodName: OnPlayClicked
+        m_TargetAssemblyTypeName: LevelButton, Assembly-CSharp
+        m_MethodName: LoadLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -608,7 +608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a6aebeb0095a9f43810196ba394b175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Level.LevelButton
-  levelIndex: 0
+  levelIndex: 1
   button: {fileID: 717792985}
   lockIcon: {fileID: 0}
   hoverScale: 1.1
@@ -5856,6 +5856,154 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!1001 &1732663945
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1101492549781059295, guid: 8166401109ae26c448234e420b204c2b, type: 3}
+      propertyPath: uiManager
+      value: 
+      objectReference: {fileID: 1732663947}
+    - target: {fileID: 1101492549781059295, guid: 8166401109ae26c448234e420b204c2b, type: 3}
+      propertyPath: inputManager
+      value: 
+      objectReference: {fileID: 1732663948}
+    - target: {fileID: 1101492549781059295, guid: 8166401109ae26c448234e420b204c2b, type: 3}
+      propertyPath: levelManager
+      value: 
+      objectReference: {fileID: 1732663951}
+    - target: {fileID: 3218572451712134550, guid: 8166401109ae26c448234e420b204c2b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 960
+      objectReference: {fileID: 0}
+    - target: {fileID: 3218572451712134550, guid: 8166401109ae26c448234e420b204c2b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 540
+      objectReference: {fileID: 0}
+    - target: {fileID: 3218572451712134550, guid: 8166401109ae26c448234e420b204c2b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3218572451712134550, guid: 8166401109ae26c448234e420b204c2b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3218572451712134550, guid: 8166401109ae26c448234e420b204c2b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3218572451712134550, guid: 8166401109ae26c448234e420b204c2b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3218572451712134550, guid: 8166401109ae26c448234e420b204c2b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3218572451712134550, guid: 8166401109ae26c448234e420b204c2b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3218572451712134550, guid: 8166401109ae26c448234e420b204c2b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3218572451712134550, guid: 8166401109ae26c448234e420b204c2b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7970375774544958947, guid: 8166401109ae26c448234e420b204c2b, type: 3}
+      propertyPath: m_Name
+      value: Manager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7970375774544958947, guid: 8166401109ae26c448234e420b204c2b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1732663948}
+    - targetCorrespondingSourceObject: {fileID: 7970375774544958947, guid: 8166401109ae26c448234e420b204c2b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1732663947}
+    - targetCorrespondingSourceObject: {fileID: 7970375774544958947, guid: 8166401109ae26c448234e420b204c2b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1732663951}
+  m_SourcePrefab: {fileID: 100100000, guid: 8166401109ae26c448234e420b204c2b, type: 3}
+--- !u!1 &1732663946 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7970375774544958947, guid: 8166401109ae26c448234e420b204c2b, type: 3}
+  m_PrefabInstance: {fileID: 1732663945}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1732663947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732663946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f28a8c9db8f34767bed4cc6c3677f555, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIManager
+  logObject: {fileID: 0}
+  levelCompleteUI: {fileID: 0}
+  levelLostUI: {fileID: 0}
+  MainMenu: {fileID: 2006719953}
+--- !u!114 &1732663948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732663946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29b1387f635059c46aa0b37cd00856d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InputManager
+  OnInteract:
+    m_PersistentCalls:
+      m_Calls: []
+  OnMove:
+    m_PersistentCalls:
+      m_Calls: []
+  OnZoom:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSelectCharacter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRecenter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRightClick:
+    m_PersistentCalls:
+      m_Calls: []
+  OnWave:
+    m_PersistentCalls:
+      m_Calls: []
+  OnReset:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1732663951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732663946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 407928459d4d80643a0f8b389eb9bb36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelManager
+  levelScenes: {fileID: 11400000, guid: 4bfb08cc5aea40d4e8f474e3b8948fc7, type: 2}
 --- !u!1 &2006719953
 GameObject:
   m_ObjectHideFlags: 0
@@ -5971,3 +6119,4 @@ SceneRoots:
   - {fileID: 2006719957}
   - {fileID: 319802580}
   - {fileID: 1163591466}
+  - {fileID: 1732663945}

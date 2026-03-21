@@ -1,8 +1,5 @@
-using Save;
 using UnityEngine;
 
-namespace Level
-{
     public class GameBoot : MonoBehaviour
     {
         [SerializeField] private ParticleSystem ps;
@@ -12,4 +9,4 @@ namespace Level
             ps.Play();
         }
     }
-}
+

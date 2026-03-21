@@ -10,12 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8c203ceb572ef54eb29b81485def289, type: 3}
-  m_Name: Level1
+  m_Name: LevelSelect
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
-  levelName: Level1
-  levelScene: {fileID: 102900000, guid: 44c3bd76813bbe641b68c1f44047ed61, type: 3}
-  waves:
-  - {fileID: 11400000, guid: fda30c36da2fc1f4b8b1a7246bf7fa2d, type: 2}
-  - {fileID: 11400000, guid: 3fa0cf3356c048f4f9941a6cb96352f6, type: 2}
-  - {fileID: 11400000, guid: f2d1bf70ca7da45499b11f15a681ca9b, type: 2}
-  levelIndex: 2
+  levelName: LevelSelect
+  levelScene: {fileID: 102900000, guid: d4db9b9329b47734992aafaba45bf4d0, type: 3}
+  waves: []
+  levelIndex: 1

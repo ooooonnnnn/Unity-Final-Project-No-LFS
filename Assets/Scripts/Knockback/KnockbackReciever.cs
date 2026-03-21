@@ -3,8 +3,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Knockback
-{
+
+
    [RequireComponent(typeof(NavMeshAgent))]
    [RequireComponent(typeof(Rigidbody))]
    public class KnockbackReciever : MonoBehaviour,Iknockbackable
@@ -96,5 +96,4 @@ namespace Knockback
          OnKnockbackEnded?.Invoke();
       }
    }
-}
 

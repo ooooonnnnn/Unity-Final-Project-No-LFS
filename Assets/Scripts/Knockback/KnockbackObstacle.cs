@@ -2,8 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Knockback
-{
     public class KnockbackObstacle : MonoBehaviour
     {
         [Header("Knockback")] [SerializeField] private KnockbackProfile profile;
@@ -132,4 +130,4 @@ namespace Knockback
             }
         }
     }
-}
+

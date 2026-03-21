@@ -1,11 +1,9 @@
 using System.Collections.Generic;
-using Managers;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-namespace Camera
-{
+
     public class MultiCharacterController : MonoBehaviour
     {
         private const string GroundLayerName = "Ground";
@@ -107,4 +105,3 @@ namespace Camera
             OnCharacterChange.Invoke(currentCharacter);
         }
     }
-}

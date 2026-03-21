@@ -1,8 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
 
-namespace Knockback
-{
     public class SpinInPlace : MonoBehaviour
     {
         [Header("Rotation")] 
@@ -22,4 +20,3 @@ namespace Knockback
             spinTween?.Kill();
         }
     }
-}

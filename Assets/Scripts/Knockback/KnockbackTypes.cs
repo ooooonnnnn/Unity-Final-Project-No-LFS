@@ -1,7 +1,7 @@
 using UnityEngine;
 
-namespace Knockback
-{
+
+
     public interface Iknockbackable
 
     {
@@ -31,4 +31,3 @@ namespace Knockback
             Source = source;
         }
     }
-}

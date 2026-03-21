@@ -1,13 +1,13 @@
-using System;
+
 using TMPro;
 using UnityEngine;
 
-namespace Managers
-{
     public class UIManager : MonoBehaviour
     {
         [SerializeField] private TMP_Text logObject;
-
+        [SerializeField] private GameObject levelCompleteUI;
+        [SerializeField] private GameObject levelLostUI;
+        [SerializeField] private GameObject MainMenu;
         public static UIManager Instance { get; private set; }
 
         void Awake()
@@ -18,17 +18,16 @@ namespace Managers
                 return;
             }
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+         
         }
 
-        /// <summary>
-        /// Print a message to the on screen log
-        /// </summary>
-        public void LogMessage(string message)
+        public void LevelWon()
         {
-            if (!logObject) throw new Exception("Log object is invalid");
-        
-            logObject.text = string.Concat(message, "\n", logObject.text);
+            //TO TO : show level complete UI with button to level selector 
+            levelCompleteUI.SetActive(true);
+            
+
+            
         }
+
     }
-}

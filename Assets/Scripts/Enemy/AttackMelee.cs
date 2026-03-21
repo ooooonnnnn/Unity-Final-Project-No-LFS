@@ -1,9 +1,7 @@
 
-using Interface;
 using UnityEngine;
 
-namespace Enemy
-{
+
     public class AttackMelee : MonoBehaviour, IEnemyAttack
     {
         [SerializeField] private float attackRate = 1f;
@@ -60,4 +58,3 @@ namespace Enemy
             spellExecutor.Execute(_owner, _target);
         }
     }
-}

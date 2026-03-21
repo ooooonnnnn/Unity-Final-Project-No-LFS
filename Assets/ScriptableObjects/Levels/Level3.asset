@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Level3
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   levelName: Level3
+  levelScene: {fileID: 102900000, guid: e40650822142603429980d71f37b702c, type: 3}
   waves:
   - {fileID: 11400000, guid: e0e17176ec975184885282e4a3c8d0fc, type: 2}
   - {fileID: 11400000, guid: f195666dd9381554ab1f60dc97016290, type: 2}
   - {fileID: 11400000, guid: 878e232ec0b379d45b1c83e18f56e188, type: 2}
-  levelIndex: 2
+  levelIndex: 4

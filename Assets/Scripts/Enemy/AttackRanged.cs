@@ -2,8 +2,7 @@
 using Interface;
 using UnityEngine;
 
-namespace Enemy
-{
+
     public class AttackRanged : MonoBehaviour, IEnemyAttack
     {
         [SerializeField] private EnemyData data;
@@ -58,4 +57,3 @@ namespace Enemy
             spellExecutor.Execute(_owner, _target, firePoint);
         }
     }
-}

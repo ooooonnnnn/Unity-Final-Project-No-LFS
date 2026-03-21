@@ -1,8 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace Wave
-{
+
     public class WaveDelayUI : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI delayText;
@@ -15,8 +14,8 @@ namespace Wave
 
         private void OnEnable()
         {
-            EnemySpawner.OnWaveDelayStarted += Show;
-            EnemySpawner.OnWaveDelayUpdated += UpdateTimer;
+            EnemySpawner.Instance.OnWaveDelayStarted += Show;
+            EnemySpawner.Instance.OnWaveDelayUpdated += UpdateTimer;
         }
     
         private void Show(float time)
@@ -36,4 +35,3 @@ namespace Wave
             }
         }
     }
-}

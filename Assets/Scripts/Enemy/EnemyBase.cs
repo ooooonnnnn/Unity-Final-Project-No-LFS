@@ -1,5 +1,3 @@
-using Enemy;
-using Interface;
 using UnityEngine;
 using UnityEngine.AI;
 

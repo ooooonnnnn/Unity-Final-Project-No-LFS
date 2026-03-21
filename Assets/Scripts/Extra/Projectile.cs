@@ -1,8 +1,6 @@
 using Interface;
 using UnityEngine;
 
-namespace Extra
-{
     public class Projectile : MonoBehaviour, ISpellable
     {
         private SpellComboDefinition _combo;
@@ -59,4 +57,3 @@ namespace Extra
             ProjectilePool.Instance.Return(_combo.prefab, gameObject);
         }
     }
-}

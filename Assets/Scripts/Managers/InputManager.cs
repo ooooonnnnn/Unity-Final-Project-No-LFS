@@ -1,8 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Managers
-{
+
     public class InputManager : MonoBehaviour
     {
         public static InputManager Instance { get; private set; }
@@ -55,4 +54,4 @@ namespace Managers
             actions.Disable();
         }
     }
-}
+

@@ -1,8 +1,6 @@
 using System.IO;
 using UnityEngine;
 
-namespace Save
-{
     public static class SaveSystem
     {
         private static string SavePath => Application.persistentDataPath + "/save.json";
@@ -44,4 +42,3 @@ namespace Save
         }
         
     }
-}

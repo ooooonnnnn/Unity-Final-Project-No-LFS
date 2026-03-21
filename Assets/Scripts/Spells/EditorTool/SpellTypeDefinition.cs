@@ -18,4 +18,5 @@ public class SpellTypeDefinition : ScriptableObject
     [Header("Parameters")]
     public float baseCooldown = 1f;
     public float manaCost = 10f;
+    public SpellDeliveryCategory spellTypeEnum;
 }

@@ -13,31 +13,30 @@ public enum SpellElement
 
 public class SpellBase : MonoBehaviour
 {
-    public SpellElement element;
+    public SpellComboDefinition spellCombo;
     [SerializeField] private ParticleSystem fireParticlePrefab;
     [SerializeField] private ParticleSystem iceParticlePrefab;
-    // Add more particle prefabs for other elements as needed
-    private ParticleSystem activeParticlePrefab;
-    protected SpellDeliveryCategory SpellType;
+    [SerializeField] private ParticleSystem lightParticlePrefab;
+    [SerializeField] private ParticleSystem darkParticlePrefab;
+    protected ParticleSystem ActiveParticlePrefab;
     protected Transform Caster;
-    private const float LifeTime = 5f;
 
     protected virtual void Awake()
     {
-        this.Caster = gameObject.transform.parent;
-        gameObject.transform.parent = null; // Detach from caster to allow independent movement
+        Caster = gameObject.transform.parent;
         transform.position = Caster.position;
         transform.rotation = Caster.rotation;
+        gameObject.transform.parent = null; // Detach from caster to allow independent movement
 
-        switch (element)
+        switch (spellCombo.element.elementEnum)
         {
             case SpellElement.Fire:
-                    activeParticlePrefab = Instantiate(fireParticlePrefab, transform.position, transform.rotation);
-                    activeParticlePrefab.transform.parent = transform;
+                    ActiveParticlePrefab = Instantiate(fireParticlePrefab, transform.position, transform.rotation);
+                    ActiveParticlePrefab.transform.parent = transform;
                 break;
             case SpellElement.Ice:
-                    activeParticlePrefab = Instantiate(iceParticlePrefab, transform.position, transform.rotation);
-                    activeParticlePrefab.transform.parent = transform;
+                    ActiveParticlePrefab = Instantiate(iceParticlePrefab, transform.position, transform.rotation);
+                    ActiveParticlePrefab.transform.parent = transform;
                 break;
             case SpellElement.Light:
             case SpellElement.Dark:
@@ -50,22 +49,22 @@ public class SpellBase : MonoBehaviour
     }
     IEnumerator DestroyAfterLifeTime()
     {
-        yield return new WaitForSeconds(LifeTime);
+        yield return new WaitForSeconds(spellCombo.duration);
         SelfDestruct();
     }
 
     protected virtual void OnCollisionEnter(Collision other)
     {
-        other.gameObject.TryGetComponent<ITakeSpellData>(out var component);
         if (other.transform == Caster) return;
-        component?.TakeSpellData(element, SpellType);
+        other.gameObject.TryGetComponent<ITakeSpellData>(out var component);
+        component?.TakeSpellData(spellCombo);
         SelfDestruct();
     }
 
     protected void SelfDestruct()
     {
-        activeParticlePrefab.transform.parent = null;
-        activeParticlePrefab.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+        ActiveParticlePrefab.transform.parent = null;
+        ActiveParticlePrefab.Stop(true, ParticleSystemStopBehavior.StopEmitting);
         Destroy(gameObject);
     }
 }

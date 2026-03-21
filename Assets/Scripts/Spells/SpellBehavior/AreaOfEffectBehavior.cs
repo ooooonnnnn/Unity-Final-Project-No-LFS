@@ -5,15 +5,15 @@ public class AreaOfEffectBehavior : SpellBase
     protected override void Awake()
     {
         base.Awake();
-        SpellType = SpellDeliveryCategory.AOE;
-    }
+        spellCombo.spellType.spellTypeEnum = SpellDeliveryCategory.AOE;
+        
+        Collider[] targets = Physics.OverlapSphere(transform.position, spellCombo.radius / 2f);
 
-    // Apply spell effects to targets within the area of effect zone
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.transform == Caster) return;
-        other.TryGetComponent<ITakeSpellData>(out var taker);
-        taker?.TakeSpellData(element, SpellType);
+        foreach (var target in targets)
+        {
+            target.TryGetComponent<ITakeSpellData>(out var taker);
+            taker?.TakeSpellData(spellCombo);
+        }
     }
     
 }

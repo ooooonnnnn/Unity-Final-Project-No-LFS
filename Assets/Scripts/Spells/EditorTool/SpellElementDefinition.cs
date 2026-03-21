@@ -11,4 +11,5 @@ public class SpellElementDefinition : ScriptableObject
     public float basePowerModifier = 1f;
     public float statusChance = 0f;
     [TextArea] public string AILabels;
+    public SpellElement elementEnum;
 }

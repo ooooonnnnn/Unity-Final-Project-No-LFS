@@ -186,7 +186,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8237142153380233752, guid: 7db36be70e196104e8cea5d5028507d3, type: 3}
       propertyPath: InheritVelocityModule.enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8237142153380233752, guid: 7db36be70e196104e8cea5d5028507d3, type: 3}
       propertyPath: InitialModule.maxNumParticles

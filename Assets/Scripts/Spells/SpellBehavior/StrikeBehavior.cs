@@ -4,7 +4,7 @@ using UnityEngine.Serialization;
 
 public class StrikeBehavior : SpellBase
 {
-    [SerializeField] private GameObject areaOfEffectZone;
+    [SerializeField] private ParticleSystem lobParticlePrefab;
     [SerializeField] private Vector3 targetPosition;
     [SerializeField] private float arcHeight = 5f;
 
@@ -14,7 +14,7 @@ public class StrikeBehavior : SpellBase
     protected override void Awake()
     {
         base.Awake();
-        SpellType = SpellDeliveryCategory.Strike;
+        lobParticlePrefab.Stop();
     }
 
     public void Update()
@@ -33,14 +33,13 @@ public class StrikeBehavior : SpellBase
     protected override void OnCollisionEnter(Collision collision)
     {
         if (collision.transform == Caster) return;
-        areaOfEffectZone.transform.position = transform.position;
-        areaOfEffectZone.SetActive(true);
-        Collider[] targets = Physics.OverlapSphere(transform.position, areaOfEffectZone.transform.lossyScale.x / 2f);
+        lobParticlePrefab.Play();
+        Collider[] targets = Physics.OverlapSphere(transform.position, spellCombo.radius / 2f);
 
         foreach (var target in targets)
         {
             target.TryGetComponent<ITakeSpellData>(out var taker);
-            taker?.TakeSpellData(element, SpellType);
+            taker?.TakeSpellData(spellCombo);
         }
 
         SelfDestruct();

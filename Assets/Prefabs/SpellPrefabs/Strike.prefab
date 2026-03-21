@@ -66,10 +66,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1488869c9c05c8044baa38b285dc0a0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StrikeBehavior
-  element: 0
-  fireParticlePrefab: {fileID: 0}
-  iceParticlePrefab: {fileID: 0}
-  spellType: 2
-  areaOfEffectZone: {fileID: 0}
+  spellCombo: {fileID: 0}
+  fireParticlePrefab: {fileID: 4226521131406917674, guid: 2222703c03988ba44b1f49f623a6a106, type: 3}
+  iceParticlePrefab: {fileID: 4226521131406917674, guid: 075c778efc1bc184b8dcd2a4133f627d, type: 3}
+  lightParticlePrefab: {fileID: 4226521131406917674, guid: e57d181e1c25f10469c6bc2a9dbaccb8, type: 3}
+  darkParticlePrefab: {fileID: 0}
+  lobParticlePrefab: {fileID: 4226521131406917674, guid: 8464a53929ee00e45996e84d46557357, type: 3}
   targetPosition: {x: 0, y: 0, z: 0}
   arcHeight: 5

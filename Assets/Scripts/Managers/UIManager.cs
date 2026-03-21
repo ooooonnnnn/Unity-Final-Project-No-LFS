@@ -1,13 +1,13 @@
-using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Managers
 {
     public class UIManager : MonoBehaviour
     {
         [SerializeField] private TMP_Text logObject;
-
+        [SerializeField] private Slider healthSlider;
         public static UIManager Instance { get; private set; }
 
         void Awake()
@@ -21,14 +21,11 @@ namespace Managers
             DontDestroyOnLoad(gameObject);
         }
 
-        /// <summary>
-        /// Print a message to the on screen log
-        /// </summary>
-        public void LogMessage(string message)
+        public void UpdatePlayerHealth(float health)
         {
-            if (!logObject) throw new Exception("Log object is invalid");
-        
-            logObject.text = string.Concat(message, "\n", logObject.text);
+
+            healthSlider.value = health;
         }
+
     }
 }

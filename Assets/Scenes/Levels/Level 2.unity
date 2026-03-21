@@ -732,6 +732,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 354922773}
     - target: {fileID: 1101492549781059295, guid: 8166401109ae26c448234e420b204c2b, type: 3}
+      propertyPath: selectedCharacter
+      value: 
+      objectReference: {fileID: 1892064451}
+    - target: {fileID: 1101492549781059295, guid: 8166401109ae26c448234e420b204c2b, type: 3}
       propertyPath: characterController
       value: 
       objectReference: {fileID: 1371742189}

@@ -100,6 +100,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3474430443314875223, guid: 23d91e9b654e09945a8960af9df0405c, type: 3}
+      propertyPath: ignoreEnemies
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5937665478864491244, guid: 23d91e9b654e09945a8960af9df0405c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.24
@@ -160,6 +164,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TankEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 8477810394355442602, guid: 23d91e9b654e09945a8960af9df0405c, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 8520818316116910619, guid: 23d91e9b654e09945a8960af9df0405c, type: 3}
       propertyPath: data
       value: 
@@ -172,6 +180,10 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 7505109443130675836}
+    - target: {fileID: 8520818316116910619, guid: 23d91e9b654e09945a8960af9df0405c, type: 3}
+      propertyPath: spellCaster
+      value: 
+      objectReference: {fileID: 6199414724364730964}
     - target: {fileID: 8520818316116910619, guid: 23d91e9b654e09945a8960af9df0405c, type: 3}
       propertyPath: attackBehaviour
       value: 
@@ -209,10 +221,21 @@ MonoBehaviour:
   attackRate: 1
   attackRange: 1.5
   animator: {fileID: 7505109443130675836}
-  spellCaster: {fileID: 0}
+  spellCaster: {fileID: 6199414724364730964}
   combo: {fileID: 11400000, guid: 60ada02ef900e6b489c4dcff3a6e5da7, type: 2}
 --- !u!4 &3772263349754092527 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5937665478864491244, guid: 23d91e9b654e09945a8960af9df0405c, type: 3}
   m_PrefabInstance: {fileID: 7367632585117141251}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6199414724364730964 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3474430443314875223, guid: 23d91e9b654e09945a8960af9df0405c, type: 3}
+  m_PrefabInstance: {fileID: 7367632585117141251}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411928434106149545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89b68e55e16b1964f823326790c2c563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpellCaster

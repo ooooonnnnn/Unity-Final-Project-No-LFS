@@ -186,6 +186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   _navMeshAgent: {fileID: 7009246980342651816}
   _cameraFollowTarget: {fileID: 2570059278487553088}
+  _PlayerCollider: {fileID: 0}
 --- !u!82 &3314898824379637395
 AudioSource:
   m_ObjectHideFlags: 0

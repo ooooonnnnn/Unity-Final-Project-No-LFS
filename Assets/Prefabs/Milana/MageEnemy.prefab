@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 5976946904217862361}
   m_Layer: 0
   m_Name: MageEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -200,6 +200,7 @@ MonoBehaviour:
   animator: {fileID: 3768243904156770731}
   visual: {fileID: 7109865536421788625}
   attackBehaviour: {fileID: 1115259387944955723}
+  spellCaster: {fileID: 5976946904217862361}
   rotationSpeed: 120
   pathUpdateInterval: 0.15
   destinationThreshold: 0.25
@@ -259,6 +260,8 @@ MonoBehaviour:
   strikePrefab: {fileID: 6810343919242758281, guid: e5d640c8806a1a347b386e684d084a70, type: 3}
   spellCombos:
   - {fileID: 11400000, guid: 60ada02ef900e6b489c4dcff3a6e5da7, type: 2}
+  ignorePlayer: 0
+  ignoreEnemies: 1
 --- !u!1001 &7287361258545421370
 PrefabInstance:
   m_ObjectHideFlags: 0

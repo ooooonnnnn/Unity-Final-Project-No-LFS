@@ -10,6 +10,7 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private Transform visual;
     [SerializeField] private MonoBehaviour attackBehaviour;
+    [SerializeField] private SpellCaster spellCaster;
 
     private IEnemyAttack attack;
 
@@ -59,8 +60,11 @@ public class EnemyBase : MonoBehaviour
     {
         target = playerTarget;
 
-        if (attack != null)
-            attack.Initialize(transform, target);
+        attack?.Initialize(transform, target);
+        if (spellCaster)
+        {
+            spellCaster.SetTarget(playerTarget);
+        }
     }
 
     public void Tick(float dt)

@@ -19,13 +19,10 @@ public class SpellBase : MonoBehaviour
     [SerializeField] private ParticleSystem lightParticlePrefab;
     [SerializeField] private ParticleSystem darkParticlePrefab;
     protected ParticleSystem ActiveParticlePrefab;
-    protected Transform Caster;
+    
 
     protected virtual void Awake()
     {
-        Caster = gameObject.transform.parent;
-        transform.position = Caster.position;
-        transform.rotation = Caster.rotation;
         gameObject.transform.parent = null; // Detach from caster to allow independent movement
 
         switch (spellCombo.element.elementEnum)
@@ -55,7 +52,7 @@ public class SpellBase : MonoBehaviour
 
     protected virtual void OnCollisionEnter(Collision other)
     {
-        if (other.transform == Caster) return;
+        //if (other.transform == Caster) return;
         other.gameObject.TryGetComponent<ITakeSpellData>(out var component);
         component?.TakeSpellData(spellCombo);
         SelfDestruct();
@@ -63,8 +60,15 @@ public class SpellBase : MonoBehaviour
 
     protected void SelfDestruct()
     {
-        ActiveParticlePrefab.transform.parent = null;
+        
         ActiveParticlePrefab.Stop(true, ParticleSystemStopBehavior.StopEmitting);
         Destroy(gameObject);
+    }
+
+    public void ChangeElement(SpellComboDefinition newCombo)
+    {
+        //if (spellCombo.spellType != newCombo.spellType) return;
+        
+        spellCombo = newCombo;
     }
 }

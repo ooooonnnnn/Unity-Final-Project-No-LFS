@@ -1,66 +1,55 @@
 using System;
+using Managers;
 using UnityEngine;
 
 public class SpellCaster : MonoBehaviour
 {
     [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private GameObject areaOfEffectPrefab;
+    //[SerializeField] private GameObject areaOfEffectPrefab;
     [SerializeField] private GameObject strikePrefab;
-    [SerializeField] private GameObject shieldPrefab;
+    //[SerializeField] private GameObject shieldPrefab;
+    [SerializeField] private SpellComboDefinition[] spellCombos;
     
-    private SpellComboDefinition projectileCombo;
-    private Transform projectileTransform;
+    private ProjectileBehavior projectileBehavior;
     
-    private SpellComboDefinition areaOfEffectCombo;
-    private Transform areaOfEffectTransform;
+    private AreaOfEffectBehavior areaOfEffectCombo;
     
-    private SpellComboDefinition strikeCombo;
-    private Transform strikeTransform;
-    
-    private SpellComboDefinition shieldCombo;
-    private Transform shieldTransform;
+    private StrikeBehavior strikeBehavior;
 
     private void Awake()
     {
-        projectileCombo = projectilePrefab.GetComponent<SpellBase>().spellCombo;
-        projectileTransform = projectilePrefab.transform;
+        projectileBehavior = projectilePrefab.GetComponent<ProjectileBehavior>();
         
-        areaOfEffectCombo = areaOfEffectPrefab.GetComponent<SpellBase>().spellCombo;
-        areaOfEffectTransform = areaOfEffectPrefab.transform;
+        strikeBehavior = strikePrefab.GetComponent<StrikeBehavior>();
         
-        strikeCombo = strikePrefab.GetComponent<SpellBase>().spellCombo;
-        strikeTransform = strikePrefab.transform;
-        
-        shieldCombo = shieldPrefab.GetComponent<SpellBase>().spellCombo;
-        shieldTransform = shieldPrefab.transform;
-        
-        //subscribe to event
+        //InputManager.Instance.OnRightClick.AddListener(() => CastSpell(spellCombos[0]));
     }
 
-    public void CastSpell(SpellComboDefinition combo = null, Transform target = null)
+    public void CastSpell()
+    {
+        CastSpell(spellCombos[0]);
+    }
+    
+    public void CastSpell(SpellComboDefinition combo)
     {
         if (!combo) return;
         switch (combo.spellType.spellTypeEnum)
         {
             case SpellDeliveryCategory.Projectile:
-                projectileCombo = combo;
-                projectileTransform.parent = gameObject.transform;
+                projectileBehavior.ChangeElement(combo);
                 Instantiate(projectilePrefab, transform.position, Quaternion.identity);
                 break;
             case SpellDeliveryCategory.AOE:
-                areaOfEffectCombo = combo;
-                areaOfEffectTransform.parent = gameObject.transform;
-                Instantiate(areaOfEffectPrefab, transform.position, Quaternion.identity);
+                //areaOfEffectCombo = combo;
+                //Instantiate(areaOfEffectPrefab, transform.position, Quaternion.identity);
                 break;
             case SpellDeliveryCategory.Strike:
-                strikeCombo = combo;
-                strikeTransform.parent = gameObject.transform;
+                strikeBehavior.ChangeElement(combo);
                 Instantiate(strikePrefab, transform.position, Quaternion.identity);
                 break;
             case SpellDeliveryCategory.Shield:
-                shieldCombo = combo;
-                shieldTransform.parent = gameObject.transform;
-                Instantiate(shieldPrefab, transform.position, Quaternion.identity);
+                //shieldCombo = combo;
+                //Instantiate(shieldPrefab, transform.position, Quaternion.identity);
                 break;
             default:
                 print("Invalid spell type");

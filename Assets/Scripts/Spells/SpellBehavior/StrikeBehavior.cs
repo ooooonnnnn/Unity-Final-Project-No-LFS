@@ -4,7 +4,10 @@ using UnityEngine.Serialization;
 
 public class StrikeBehavior : SpellBase
 {
-    [SerializeField] private ParticleSystem lobParticlePrefab;
+    [SerializeField] private Color fireColor;
+    [SerializeField] private Color iceColor;
+    [SerializeField] private Color lightColor;
+    [SerializeField] private Color darkColor;
     [SerializeField] private Vector3 targetPosition;
     [SerializeField] private float arcHeight = 5f;
 
@@ -14,17 +17,18 @@ public class StrikeBehavior : SpellBase
     protected override void Awake()
     {
         base.Awake();
-        lobParticlePrefab.Stop();
+        ActiveParticlePrefab.Stop();
     }
 
-    public void Update()
+    public void LateUpdate()
     {
-        if (!(progress < 1f)) return;
+        if (progress >= spellCombo.duration - 1) return;
         progress += Time.deltaTime;
 
-        Vector3 horizontalPosition = Vector3.Lerp(startPosition, targetPosition, progress);
+        Vector3 horizontalPosition =
+            Vector3.Lerp(startPosition, targetPosition, progress);
 
-        float height = Mathf.Sin(progress * Mathf.PI) * arcHeight;
+        float height = Mathf.Sin(progress / (spellCombo.duration - 1) * Mathf.PI) * arcHeight;
 
         transform.position = new Vector3(horizontalPosition.x, horizontalPosition.y + height, horizontalPosition.z);
     }
@@ -32,8 +36,8 @@ public class StrikeBehavior : SpellBase
     // Spawn the area of effect zone and apply spell effects to targets within the zone
     protected override void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform == Caster) return;
-        lobParticlePrefab.Play();
+        //if (collision.transform == Caster) return;
+        ActiveParticlePrefab.Play();
         Collider[] targets = Physics.OverlapSphere(transform.position, spellCombo.radius / 2f);
 
         foreach (var target in targets)

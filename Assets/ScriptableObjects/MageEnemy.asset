@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   moveSpeed: 4
   minAttackRange: 12
-  maxAttackRange: 16
+  maxAttackRange: 20
   fireRate: 6
   projectileSpeed: 3
   projectileDamage: 10

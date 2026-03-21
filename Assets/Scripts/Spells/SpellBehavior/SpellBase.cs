@@ -1,0 +1,70 @@
+using System;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.Serialization;
+
+public enum SpellElement
+{
+    Fire,
+    Ice,
+    Light,
+    Dark
+}
+
+public class SpellBase : MonoBehaviour
+{
+    public SpellComboDefinition spellCombo;
+    [SerializeField] private ParticleSystem fireParticlePrefab;
+    [SerializeField] private ParticleSystem iceParticlePrefab;
+    [SerializeField] private ParticleSystem lightParticlePrefab;
+    [SerializeField] private ParticleSystem darkParticlePrefab;
+    protected ParticleSystem ActiveParticlePrefab;
+    protected Transform Caster;
+
+    protected virtual void Awake()
+    {
+        Caster = gameObject.transform.parent;
+        transform.position = Caster.position;
+        transform.rotation = Caster.rotation;
+        gameObject.transform.parent = null; // Detach from caster to allow independent movement
+
+        switch (spellCombo.element.elementEnum)
+        {
+            case SpellElement.Fire:
+                    ActiveParticlePrefab = Instantiate(fireParticlePrefab, transform.position, transform.rotation);
+                    ActiveParticlePrefab.transform.parent = transform;
+                break;
+            case SpellElement.Ice:
+                    ActiveParticlePrefab = Instantiate(iceParticlePrefab, transform.position, transform.rotation);
+                    ActiveParticlePrefab.transform.parent = transform;
+                break;
+            case SpellElement.Light:
+            case SpellElement.Dark:
+                // Instantiate corresponding particle effects for Earth, Light, and Dark elements
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+        StartCoroutine(DestroyAfterLifeTime());
+    }
+    IEnumerator DestroyAfterLifeTime()
+    {
+        yield return new WaitForSeconds(spellCombo.duration);
+        SelfDestruct();
+    }
+
+    protected virtual void OnCollisionEnter(Collision other)
+    {
+        if (other.transform == Caster) return;
+        other.gameObject.TryGetComponent<ITakeSpellData>(out var component);
+        component?.TakeSpellData(spellCombo);
+        SelfDestruct();
+    }
+
+    protected void SelfDestruct()
+    {
+        ActiveParticlePrefab.transform.parent = null;
+        ActiveParticlePrefab.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+        Destroy(gameObject);
+    }
+}

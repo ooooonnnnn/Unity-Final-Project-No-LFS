@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Camera;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Managers
 {
@@ -8,15 +9,9 @@ namespace Managers
     {
         public static GameManager Instance { get; private set; }
         public GameObject spawnPoint;
-    
-        [SerializeField] private MultiCharacterController characterController;
-        [SerializeField] private InputManager inputManager;
-        [SerializeField] private string resetPromptMessage = "Press R to reset the selected character.";
-    
 
-        private readonly HashSet<CharacterComponents> charactersInResetZone = new();
-        private CharacterComponents selectedCharacter;
-        private bool promptShown;
+        [SerializeField] private InputManager inputManager;
+        [SerializeField] private CharacterComponents selectedCharacter;
 
 
         private void Awake()
@@ -29,61 +24,29 @@ namespace Managers
 
             Instance = this;
             DontDestroyOnLoad(gameObject);
-        
         }
 
         private void OnEnable()
         {
-            characterController.OnCharacterChange.AddListener(HandleCharacterChange);
-
-            inputManager.OnReset.AddListener(HandleReset);
+            selectedCharacter.OnPlayerDied += PlayerLost;
+            EnemySpawner.OnWaveCompleted += PlayerWon;
         }
 
         private void OnDisable()
         {
-            if (characterController)
-                characterController.OnCharacterChange.RemoveListener(HandleCharacterChange);
-            if (inputManager)
-                inputManager.OnReset.RemoveListener(HandleReset);
+            selectedCharacter.OnPlayerDied -= PlayerLost;
+            EnemySpawner.OnWaveCompleted -= PlayerWon;
         }
 
-        private void Start()
+        private void PlayerWon()
         {
-            selectedCharacter = characterController.CurrentCharacter;
-            UpdateResetPrompt();
-        }
-        private void HandleCharacterChange(CharacterComponents character)
-        {
-            selectedCharacter = character;
-            UpdateResetPrompt();
+            SceneManager.LoadScene("LevelSelect");
         }
 
-        private void HandleReset()
+
+        private void PlayerLost()
         {
-            if (!selectedCharacter)
-                return;
-
-            if (!charactersInResetZone.Contains(selectedCharacter))
-                return;
-
-   
-            UIManager.Instance.LogMessage($"{selectedCharacter.gameObject.name} reset to start.");
-        }
-
-        private void UpdateResetPrompt()
-        {
-            if (selectedCharacter && charactersInResetZone.Contains(selectedCharacter))
-            {
-                if (!promptShown)
-                {
-                    UIManager.Instance.LogMessage(resetPromptMessage);
-                    promptShown = true;
-                }
-            }
-            else
-            {
-                promptShown = false;
-            }
+            SceneManager.LoadScene("MainMenu");
         }
     }
 }

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Camera;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,7 +11,7 @@ namespace Managers
 
         [SerializeField] private InputManager inputManager;
         [SerializeField] private CharacterComponents selectedCharacter;
-
+        [SerializeField] private UIManager uiManager;
 
         private void Awake()
         {
@@ -28,12 +27,21 @@ namespace Managers
 
         private void OnEnable()
         {
+            selectedCharacter.OnHealthChanged += UpdateHealth;
             selectedCharacter.OnPlayerDied += PlayerLost;
             EnemySpawner.OnWaveCompleted += PlayerWon;
+            
+
+        }
+
+        private void UpdateHealth(float health)
+        {
+            uiManager.UpdatePlayerHealth(health / CharacterComponents.MAX_HEALTH);
         }
 
         private void OnDisable()
         {
+            selectedCharacter.OnHealthChanged -= UpdateHealth;
             selectedCharacter.OnPlayerDied -= PlayerLost;
             EnemySpawner.OnWaveCompleted -= PlayerWon;
         }

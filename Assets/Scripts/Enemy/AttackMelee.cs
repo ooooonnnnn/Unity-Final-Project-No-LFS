@@ -1,5 +1,3 @@
-
-using Interface;
 using UnityEngine;
 
 namespace Enemy

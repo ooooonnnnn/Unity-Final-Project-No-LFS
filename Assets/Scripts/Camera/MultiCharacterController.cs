@@ -66,7 +66,7 @@ namespace Camera
         {
             Ray ray = UnityEngine.Camera.main.ScreenPointToRay(Mouse.current.position.value);
             Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 1f);
-            if (!Physics.Raycast(ray, out RaycastHit colliderHit, Mathf.Infinity, LayerMask.GetMask(GroundLayerName)))
+            if (!Physics.Raycast(ray, out RaycastHit colliderHit, 10000, LayerMask.GetMask(GroundLayerName)))
             {
                 return;
             }

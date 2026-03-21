@@ -44,5 +44,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d20ed185385532846afc63d9446a0e26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectilePool
-  projectilePrefab: {fileID: -335621552214816184, guid: da10c2724da12f74dbc01a2c4c41a56f, type: 3}
-  poolSize: 16

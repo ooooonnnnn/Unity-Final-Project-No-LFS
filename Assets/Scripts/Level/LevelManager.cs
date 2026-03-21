@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -21,11 +22,11 @@ namespace Level
             DontDestroyOnLoad(gameObject);
         }
 
-        public void LoadLevel(int levelIndex)
+        public void LoadLevel(int levelIndex, SceneAsset levelScene)
         {
             CurrentLevelIndex = levelIndex;
 
-            SceneManager.LoadScene("EnemyScene");
+            SceneManager.LoadScene(levelScene.name);
         }
     
         public void ReturnToLevelSelect()

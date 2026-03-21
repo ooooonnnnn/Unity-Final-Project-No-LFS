@@ -9,7 +9,7 @@ using Random = UnityEngine.Random;
 
     public class EnemySpawner : MonoBehaviour
     {
-        [SerializeField] private LevelData[] levels;
+        [SerializeField] private LevelData waves;
         [SerializeField] private Transform[] spawnPoints;
         [SerializeField] private Transform playerTarget;
         [SerializeField] private GameObject levelCompleteUI;
@@ -36,15 +36,10 @@ using Random = UnityEngine.Random;
 
         private void Start()
         {
-            int levelIndex = LevelManager.Instance.CurrentLevelIndex;
-
-            if (levelIndex >= levels.Length)
-                levelIndex = 0;
-            
             EnemyBase.OnEnemyKilled += HandleEnemyKilled;
             OnWaveCompleted += HandleLevelComplete;
 
-            StartCoroutine(SpawnRoutine(levels[levelIndex]));
+            StartCoroutine(SpawnRoutine(waves));
         }
         
         private IEnumerator SpawnRoutine(LevelData level)

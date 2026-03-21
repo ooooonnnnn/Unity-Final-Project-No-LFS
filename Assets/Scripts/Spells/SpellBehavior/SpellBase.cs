@@ -18,6 +18,9 @@ public class SpellBase : MonoBehaviour
     [SerializeField] private ParticleSystem iceParticlePrefab;
     [SerializeField] private ParticleSystem lightParticlePrefab;
     [SerializeField] private ParticleSystem darkParticlePrefab;
+
+    public bool ignorePlayer = false;
+    public bool ignoreEnemies = false;
     protected ParticleSystem ActiveParticlePrefab;
     
 
@@ -52,7 +55,8 @@ public class SpellBase : MonoBehaviour
 
     protected virtual void OnCollisionEnter(Collision other)
     {
-        //if (other.transform == Caster) return;
+        if (ignorePlayer && other.gameObject.CompareTag("Player")) return;
+        if (ignoreEnemies && other.gameObject.CompareTag("Enemy")) return;
         other.gameObject.TryGetComponent<ITakeSpellData>(out var component);
         component?.TakeSpellData(spellCombo);
         SelfDestruct();

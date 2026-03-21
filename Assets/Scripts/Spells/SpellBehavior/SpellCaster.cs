@@ -10,6 +10,9 @@ public class SpellCaster : MonoBehaviour
     //[SerializeField] private GameObject shieldPrefab;
     [SerializeField] private SpellComboDefinition[] spellCombos;
     
+    [SerializeField] private bool ignorePlayer = false;
+    [SerializeField] private bool ignoreEnemies = false;
+    
     private ProjectileBehavior projectileBehavior;
     
     private AreaOfEffectBehavior areaOfEffectCombo;
@@ -19,8 +22,12 @@ public class SpellCaster : MonoBehaviour
     private void Awake()
     {
         projectileBehavior = projectilePrefab.GetComponent<ProjectileBehavior>();
+        projectileBehavior.ignorePlayer = ignorePlayer;
+        projectileBehavior.ignoreEnemies = ignoreEnemies;
         
         strikeBehavior = strikePrefab.GetComponent<StrikeBehavior>();
+        strikeBehavior.ignorePlayer = ignorePlayer;
+        strikeBehavior.ignoreEnemies = ignoreEnemies;
         
         //InputManager.Instance.OnRightClick.AddListener(() => CastSpell(spellCombos[0]));
     }

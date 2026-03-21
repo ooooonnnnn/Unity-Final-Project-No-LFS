@@ -60,7 +60,7 @@ public class SpellBase : MonoBehaviour
 
     protected void SelfDestruct()
     {
-        
+        ActiveParticlePrefab.transform.parent = null;
         ActiveParticlePrefab.Stop(true, ParticleSystemStopBehavior.StopEmitting);
         Destroy(gameObject);
     }

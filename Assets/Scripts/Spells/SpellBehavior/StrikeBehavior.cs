@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -17,26 +19,44 @@ public class StrikeBehavior : SpellBase
     protected override void Awake()
     {
         base.Awake();
-        ActiveParticlePrefab.Stop();
+        ActiveParticlePrefab.Pause();
+
+        // Initialize startPosition at the start of the motion
+        startPosition = transform.position;
     }
 
-    public void LateUpdate()
+    public void Update()
     {
-        if (progress >= spellCombo.duration - 1) return;
-        progress += Time.deltaTime;
+        // Stop updating if progress exceeds duration
+        if (progress >= 2)
+        {
+            StartCoroutine(Exolode());
+            enabled = false; // Disable Update
+            return;
+        }
 
-        Vector3 horizontalPosition =
-            Vector3.Lerp(startPosition, targetPosition, progress);
+        // Update progress
+        progress = Mathf.Min(progress + Time.deltaTime, 2);
 
-        float height = Mathf.Sin(progress / (spellCombo.duration - 1) * Mathf.PI) * arcHeight;
+        // Calculate horizontal position
+        Vector3 horizontalPosition = Vector3.Lerp(startPosition, targetPosition, progress / (spellCombo.duration - 1f));
 
+        // Calculate sinusoidal height
+        float height = Mathf.Sin(progress / 2 * Mathf.PI) * arcHeight;
+
+        // Update transform position
         transform.position = new Vector3(horizontalPosition.x, horizontalPosition.y + height, horizontalPosition.z);
     }
 
     // Spawn the area of effect zone and apply spell effects to targets within the zone
     protected override void OnCollisionEnter(Collision collision)
     {
-        //if (collision.transform == Caster) return;
+        StartCoroutine(Exolode());
+    }
+
+    private IEnumerator Exolode()
+    {
+        ActiveParticlePrefab.transform.position = transform.position;
         ActiveParticlePrefab.Play();
         Collider[] targets = Physics.OverlapSphere(transform.position, spellCombo.radius / 2f);
 
@@ -45,6 +65,8 @@ public class StrikeBehavior : SpellBase
             target.TryGetComponent<ITakeSpellData>(out var taker);
             taker?.TakeSpellData(spellCombo);
         }
+        
+        yield return new WaitForSeconds(1f);
 
         SelfDestruct();
     }

@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eaf72a3b633144c44903981aea999c9f, type: 3}
-  m_Name: _Element__SpellType_Combo_asset
+  m_Name: ComboIce_Projectile
   m_EditorClassIdentifier: Assembly-CSharp::SpellComboDefinition
-  element: {fileID: 11400000, guid: 017e092813888774caf4a58bb7592423, type: 2}
-  spellType: {fileID: 11400000, guid: 969bcc1e3c842ec4eb0e6cb7ed2ac11e, type: 2}
+  element: {fileID: 11400000, guid: 192864191ed117645ace4a9fd260946c, type: 2}
+  spellType: {fileID: 11400000, guid: 6c06b7eb3ec427842bf748deea117991, type: 2}
   description: 
   isUnlockedByDefault: 1
   powerMultiplier: 1
-  duration: 3
+  duration: 1
   speed: 10
   radius: 1
   prefab: {fileID: 0}

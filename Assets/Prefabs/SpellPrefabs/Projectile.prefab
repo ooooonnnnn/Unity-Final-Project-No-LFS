@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0139a6c8025fc24fa2c333891c49806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileBehavior
-  spellCombo: {fileID: 0}
+  spellCombo: {fileID: 11400000, guid: 60ada02ef900e6b489c4dcff3a6e5da7, type: 2}
   fireParticlePrefab: {fileID: 8237142153380233752, guid: 7db36be70e196104e8cea5d5028507d3, type: 3}
   iceParticlePrefab: {fileID: 4226521131406917674, guid: 71602d63457a31a4cbc5890393f05859, type: 3}
   lightParticlePrefab: {fileID: 4226521131406917674, guid: fc79985ba8969144ea50bb1e96a84c79, type: 3}

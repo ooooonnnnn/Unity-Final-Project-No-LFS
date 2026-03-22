@@ -45,6 +45,7 @@ namespace Level
         public void LoadLevel()
         {
             LevelManager.Instance.LoadLevel(levelIndex, levelScene);
+            AudioManager.Instance.PlayMusic(levelIndex + 1);
         }
 
         public void OnPlayClicked()

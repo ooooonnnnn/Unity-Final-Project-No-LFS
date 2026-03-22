@@ -15,7 +15,7 @@ public class SpellCaster : MonoBehaviour
     [SerializeField] private bool ignorePlayer = false;
     [SerializeField] private bool ignoreEnemies = false;
 
-    private Transform _target; 
+    private Transform target; 
     private EnemyData enemyData;
     
     private ProjectileBehavior projectileBehavior;
@@ -34,7 +34,7 @@ public class SpellCaster : MonoBehaviour
 
     public void SetTarget(Transform target)
     {
-        _target = target;
+        this.target = target;
     }
 
     public void CastSpell()
@@ -60,7 +60,7 @@ public class SpellCaster : MonoBehaviour
                     behavior.ignorePlayer = ignorePlayer;
                     behavior.ignoreEnemies = ignoreEnemies;
                     
-                    behavior.SetTarget(_target);
+                    behavior.SetTarget(target);
                     behavior.SetDamage(enemyData.projectileDamage);
                 }
 

@@ -19,5 +19,5 @@ MonoBehaviour:
   powerMultiplier: 1
   duration: 1
   speed: 10
-  radius: 1
+  radius: 100
   prefab: {fileID: 0}

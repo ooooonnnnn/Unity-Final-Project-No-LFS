@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpellCaster : MonoBehaviour
 {
     [SerializeField] private GameObject projectilePrefab;
-    //[SerializeField] private GameObject areaOfEffectPrefab;
+    [SerializeField] private GameObject areaOfEffectPrefab;
     [SerializeField] private GameObject strikePrefab;
     //[SerializeField] private GameObject shieldPrefab;
     [SerializeField] private SpellComboDefinition[] spellCombos;
@@ -48,7 +48,7 @@ public class SpellCaster : MonoBehaviour
         {
             case SpellDeliveryCategory.Projectile:
             {
-                GameObject proj = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+                var proj = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
 
                 var behavior = proj.GetComponent<ProjectileBehavior>();
 
@@ -66,11 +66,24 @@ public class SpellCaster : MonoBehaviour
             }
 
             case SpellDeliveryCategory.AOE:
-                break;
+            {
+                var proj = Instantiate(areaOfEffectPrefab, transform.position, Quaternion.identity);
 
+                var behavior = proj.GetComponent<AreaOfEffectBehavior>();
+
+                if (behavior)
+                {
+                    behavior.ChangeElement(combo);
+                    behavior.ignorePlayer = ignorePlayer;
+                    behavior.ignoreEnemies = ignoreEnemies;
+                    behavior.CastSpell();
+                }
+
+                break;
+            }
             case SpellDeliveryCategory.Strike:
             {
-                GameObject strike = Instantiate(strikePrefab, transform.position, Quaternion.identity);
+                var strike = Instantiate(strikePrefab, transform.position, Quaternion.identity);
 
                 var behavior = strike.GetComponent<StrikeBehavior>();
 

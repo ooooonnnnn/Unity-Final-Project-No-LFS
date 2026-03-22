@@ -1,17 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 public class StrikeBehavior : SpellBase
 {
-    [SerializeField] private Color fireColor;
-    [SerializeField] private Color iceColor;
-    [SerializeField] private Color lightColor;
-    [SerializeField] private Color darkColor;
-    [SerializeField] private Vector3 targetPosition;
+    public Vector3 targetPosition = Vector3.zero;
     [SerializeField] private float arcHeight = 5f;
+    [SerializeField] private Rigidbody rb;
 
     private Vector3 startPosition;
     private float progress;
@@ -20,42 +18,38 @@ public class StrikeBehavior : SpellBase
     {
         base.Awake();
         ActiveParticlePrefab.Pause();
-
-        // Initialize startPosition at the start of the motion
         startPosition = transform.position;
     }
 
     public void Update()
     {
-        // Stop updating if progress exceeds duration
         if (progress >= 2)
         {
-            StartCoroutine(Exolode());
-            enabled = false; // Disable Update
+            StartCoroutine(Explode());
+            enabled = false;
             return;
         }
 
-        // Update progress
         progress = Mathf.Min(progress + Time.deltaTime, 2);
-
-        // Calculate horizontal position
-        Vector3 horizontalPosition = Vector3.Lerp(startPosition, targetPosition, progress / (spellCombo.duration - 1f));
-
-        // Calculate sinusoidal height
+        Vector3 horizontalPosition = Vector3.Lerp(startPosition, targetPosition, progress / 2);
         float height = Mathf.Sin(progress / 2 * Mathf.PI) * arcHeight;
-
-        // Update transform position
         transform.position = new Vector3(horizontalPosition.x, horizontalPosition.y + height, horizontalPosition.z);
     }
 
     // Spawn the area of effect zone and apply spell effects to targets within the zone
-    protected override void OnCollisionEnter(Collision collision)
+    protected override void OnCollisionEnter(Collision other)
     {
-        StartCoroutine(Exolode());
+        if (other.gameObject.CompareTag("Spell")) return; // Ignore collisions with other spells
+        if (ignorePlayer && other.gameObject.CompareTag("Player")) return;
+        if (ignoreEnemies && other.gameObject.CompareTag("Enemy")) return;
+        print("Strike collided with " + other.gameObject.name);
+        StartCoroutine(Explode());
     }
 
-    private IEnumerator Exolode()
+    private IEnumerator Explode()
     {
+        gameObject.transform.rotation = quaternion.identity;
+        rb.isKinematic = true; // Stop movement
         ActiveParticlePrefab.transform.position = transform.position;
         ActiveParticlePrefab.Play();
         Collider[] targets = Physics.OverlapSphere(transform.position, spellCombo.radius / 2f);
@@ -69,5 +63,14 @@ public class StrikeBehavior : SpellBase
         yield return new WaitForSeconds(1f);
 
         SelfDestruct();
+    }
+    
+    public override void ChangeElement(SpellComboDefinition newCombo)
+    {
+        if (spellCombo.spellType != newCombo.spellType) return;
+        
+        spellCombo = newCombo;
+        if (ActiveParticlePrefab) Destroy(ActiveParticlePrefab);
+        InstantiateActiveParticle(true);
     }
 }

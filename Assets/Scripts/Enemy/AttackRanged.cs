@@ -1,5 +1,6 @@
 
 using Interface;
+using Managers;
 using UnityEngine;
 
 namespace Enemy
@@ -54,6 +55,9 @@ namespace Enemy
             {
                 spellCaster.CastSpell();
             }
+            
+            
+            // GameManager.Instance.selectedCharacter.TakeDamage(data.projectileDamage);
         }
     }
 }

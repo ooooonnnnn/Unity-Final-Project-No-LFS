@@ -1,3 +1,5 @@
+using Extra;
+using Managers;
 using UnityEngine;
 
 namespace Enemy
@@ -6,6 +8,7 @@ namespace Enemy
     {
         [SerializeField] private float attackRate = 1f;
         [SerializeField] private float attackRange = 1.5f;
+        [SerializeField] private EnemyData data;
         [SerializeField] private Animator animator;
         [SerializeField] private SpellCaster spellCaster;
         [SerializeField] private SpellComboDefinition combo;
@@ -15,7 +18,7 @@ namespace Enemy
         private float _timer;
 
         private static readonly int AttackHash = Animator.StringToHash("Attack");
-
+        
         public void Initialize(Transform owner, Transform target)
         {
             _owner = owner;
@@ -54,6 +57,8 @@ namespace Enemy
             {
                 spellCaster.CastSpell(); 
             }
+
+            //GameManager.Instance.selectedCharacter.TakeDamage(data.projectileDamage);
         }
     }
 }

@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96250fe17b87571479100642be7188ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
-  wave: {fileID: 11400000, guid: fda30c36da2fc1f4b8b1a7246bf7fa2d, type: 2}
+  waves: {fileID: 11400000, guid: 9be4755de97f90941b84cea407c73edc, type: 2}
   spawnPoints:
   - {fileID: 0}
   - {fileID: 0}

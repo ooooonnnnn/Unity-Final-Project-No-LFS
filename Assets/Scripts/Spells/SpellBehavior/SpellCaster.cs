@@ -14,8 +14,9 @@ public class SpellCaster : MonoBehaviour
     
     [SerializeField] private bool ignorePlayer = false;
     [SerializeField] private bool ignoreEnemies = false;
-    
-    private Transform target;
+
+    private Transform _target; 
+    private EnemyData enemyData;
     
     private ProjectileBehavior projectileBehavior;
     private AreaOfEffectBehavior areaOfEffectCombo;
@@ -26,10 +27,14 @@ public class SpellCaster : MonoBehaviour
         projectileBehavior = projectilePrefab.GetComponent<ProjectileBehavior>();
         strikeBehavior = strikePrefab.GetComponent<StrikeBehavior>();
     }
+    public void Initialize(EnemyData data)
+    {
+        enemyData = data;
+    }
 
     public void SetTarget(Transform target)
     {
-        this.target = target;
+        _target = target;
     }
 
     public void CastSpell()
@@ -55,7 +60,8 @@ public class SpellCaster : MonoBehaviour
                     behavior.ignorePlayer = ignorePlayer;
                     behavior.ignoreEnemies = ignoreEnemies;
                     
-                    behavior.SetTarget(target);
+                    behavior.SetTarget(_target);
+                    behavior.SetDamage(enemyData.projectileDamage);
                 }
 
                 break;

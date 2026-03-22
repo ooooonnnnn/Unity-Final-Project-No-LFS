@@ -38,12 +38,12 @@ public class EnemyBase : MonoBehaviour
         agent.updateRotation = false;
         agent.avoidancePriority = Random.Range(70, 90);
         agent.stoppingDistance = 0f;
-
         attack = attackBehaviour as IEnemyAttack;
         if (attack == null)
         {
             Debug.LogError($"{name}: AttackBehaviour does not implement IEnemyAttack");
         }
+        spellCaster.Initialize(data);
     }
 
     private void OnEnable()

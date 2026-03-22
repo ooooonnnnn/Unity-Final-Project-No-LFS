@@ -8,6 +8,7 @@ namespace Managers
     {
         [SerializeField] private TMP_Text logObject;
         [SerializeField] private Slider healthSlider;
+        [SerializeField] private GameObject deathPanel;
         public static UIManager Instance { get; private set; }
 
         void Awake()
@@ -25,6 +26,10 @@ namespace Managers
         {
 
             healthSlider.value = health;
+        }
+        public void ShowDeathPanel()
+        {
+            deathPanel.SetActive(true);
         }
 
     }

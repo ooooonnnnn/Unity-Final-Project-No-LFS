@@ -61,6 +61,7 @@ public class SpellBase : MonoBehaviour
         if (ignoreEnemies && other.gameObject.CompareTag("Enemy")) return;
         other.gameObject.TryGetComponent<ITakeSpellData>(out var component);
         component?.TakeSpellData(spellCombo);
+        Debug.Log("Hit" + other.gameObject.name);
         SelfDestruct();
     }
 

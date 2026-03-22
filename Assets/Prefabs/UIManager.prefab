@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
   logObject: {fileID: 0}
   healthSlider: {fileID: 0}
+  deathPanel: {fileID: 7078834200505236921, guid: 2e3acdfa7b8709d44885e08ff071cde9, type: 3}

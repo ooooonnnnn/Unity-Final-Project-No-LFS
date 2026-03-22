@@ -1,6 +1,8 @@
 using System;
 using Managers;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class SpellCaster : MonoBehaviour
 {
@@ -12,8 +14,8 @@ public class SpellCaster : MonoBehaviour
     
     [SerializeField] private bool ignorePlayer = false;
     [SerializeField] private bool ignoreEnemies = false;
-
-    private Transform _target; 
+    
+    private Transform target;
     
     private ProjectileBehavior projectileBehavior;
     private AreaOfEffectBehavior areaOfEffectCombo;
@@ -27,7 +29,7 @@ public class SpellCaster : MonoBehaviour
 
     public void SetTarget(Transform target)
     {
-        _target = target;
+        this.target = target;
     }
 
     public void CastSpell()
@@ -53,7 +55,7 @@ public class SpellCaster : MonoBehaviour
                     behavior.ignorePlayer = ignorePlayer;
                     behavior.ignoreEnemies = ignoreEnemies;
                     
-                    behavior.SetTarget(_target);
+                    behavior.SetTarget(target);
                 }
 
                 break;

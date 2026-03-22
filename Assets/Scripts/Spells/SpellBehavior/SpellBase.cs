@@ -21,8 +21,9 @@ public class SpellBase : MonoBehaviour
 
     public bool ignorePlayer = false;
     public bool ignoreEnemies = false;
-    protected ParticleSystem ActiveParticlePrefab;
     
+    protected ParticleSystem ActiveParticlePrefab;
+
 
     protected virtual void Awake()
     {
@@ -73,7 +74,7 @@ public class SpellBase : MonoBehaviour
     public virtual void ChangeElement(SpellComboDefinition newCombo)
     {
         if (spellCombo.spellType != newCombo.spellType) return;
-        
+
         spellCombo = newCombo;
         if (ActiveParticlePrefab) Destroy(ActiveParticlePrefab);
         InstantiateActiveParticle();

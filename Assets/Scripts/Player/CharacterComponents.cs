@@ -21,6 +21,7 @@ namespace Camera
 
 
         private float health;
+        private bool isDead = false;
 
         private void Awake()
         {
@@ -33,6 +34,12 @@ namespace Camera
             OnHealthChanged?.Invoke(health);
         }
 
+        public void ResetHealthPlayer()
+        {
+            health = MAX_HEALTH;
+        }
+        
+
         private void OnValidate()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>(); //editor time
@@ -40,14 +47,22 @@ namespace Camera
 
         public void TakeDamage(float damage)
         {
-            health -= damage;
-            if (health <= 0)
-            {
-                OnPlayerDied?.Invoke();
-                return;
-            }
+                health -= damage;
+                Debug.Log("Player hit. HP: " + health);
+                if (health <= 0)
+                {
+                    Die();
+                }
+                OnHealthChanged?.Invoke(health);
+        }
+        private void Die()
+        {
+            if (isDead) return;
 
-            OnHealthChanged?.Invoke(health);
+            isDead = true;
+            Debug.Log("Player died");
+
+            OnPlayerDied?.Invoke();
         }
     }
 }

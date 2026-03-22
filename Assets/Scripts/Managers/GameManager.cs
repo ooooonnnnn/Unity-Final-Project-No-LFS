@@ -10,7 +10,7 @@ namespace Managers
         public GameObject spawnPoint;
 
         [SerializeField] private InputManager inputManager;
-        [SerializeField] private CharacterComponents selectedCharacter;
+        [SerializeField] public CharacterComponents selectedCharacter;
         [SerializeField] private UIManager uiManager;
 
         private void Awake()
@@ -30,8 +30,22 @@ namespace Managers
             selectedCharacter.OnHealthChanged += UpdateHealth;
             selectedCharacter.OnPlayerDied += PlayerLost;
             EnemySpawner.OnWaveCompleted += PlayerWon;
-            
 
+
+        }
+        public void SetPlayer(CharacterComponents player)
+        {
+            
+            if (selectedCharacter != null)
+            {
+                selectedCharacter.OnHealthChanged -= UpdateHealth;
+                selectedCharacter.OnPlayerDied -= PlayerLost;
+            }
+
+            selectedCharacter = player;
+            
+            selectedCharacter.OnHealthChanged += UpdateHealth;
+            selectedCharacter.OnPlayerDied += PlayerLost;
         }
 
         private void UpdateHealth(float health)
@@ -54,7 +68,11 @@ namespace Managers
 
         private void PlayerLost()
         {
-          // SceneManager.LoadScene("MainMenu");
+            Debug.Log("Game Over");
+
+            uiManager.ShowDeathPanel(); 
+
+            Time.timeScale = 0f; 
         }
     }
 }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6718615144562643817}
   - component: {fileID: 4771599482890012711}
   m_Layer: 0
-  m_Name: Crystals crossfade 2
+  m_Name: AoeIceParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

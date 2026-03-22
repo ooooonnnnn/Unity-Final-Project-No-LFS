@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 7295592568677861945}
   m_Layer: 0
   m_Name: Strike
-  m_TagString: Untagged
+  m_TagString: Spell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,17 +71,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1488869c9c05c8044baa38b285dc0a0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StrikeBehavior
-  spellCombo: {fileID: 11400000, guid: b17c70bdefd1ee74fb1acc22171d60a1, type: 2}
-  fireParticlePrefab: {fileID: 6718615144562643817, guid: fbe29fb53ddb2354c9eb96f0c36903cd, type: 3}
+  spellCombo: {fileID: 11400000, guid: 226f0c54cf13661459d6f0c3c0fc65a6, type: 2}
+  fireParticlePrefab: {fileID: 6718615144562643817, guid: 9848e78e6ab49fd42be17b80862cd831, type: 3}
   iceParticlePrefab: {fileID: 6718615144562643817, guid: fbe29fb53ddb2354c9eb96f0c36903cd, type: 3}
-  lightParticlePrefab: {fileID: 6718615144562643817, guid: fbe29fb53ddb2354c9eb96f0c36903cd, type: 3}
-  darkParticlePrefab: {fileID: 6718615144562643817, guid: fbe29fb53ddb2354c9eb96f0c36903cd, type: 3}
-  fireColor: {r: 0, g: 0, b: 0, a: 0}
-  iceColor: {r: 0, g: 0, b: 0, a: 0}
-  lightColor: {r: 0, g: 0, b: 0, a: 0}
-  darkColor: {r: 0, g: 0, b: 0, a: 0}
+  lightParticlePrefab: {fileID: 6718615144562643817, guid: d9eb2fa634795264698f1817e6f0df4b, type: 3}
+  darkParticlePrefab: {fileID: 6718615144562643817, guid: c80545728056aa44caacef1309e2b708, type: 3}
+  ignorePlayer: 0
+  ignoreEnemies: 0
   targetPosition: {x: 0, y: 0, z: 0}
   arcHeight: 5
+  rb: {fileID: 7295592568677861945}
 --- !u!198 &4354219523290800541
 ParticleSystem:
   m_ObjectHideFlags: 0

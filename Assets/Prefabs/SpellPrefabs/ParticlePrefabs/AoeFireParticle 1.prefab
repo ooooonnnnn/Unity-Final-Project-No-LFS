@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6718615144562643817}
   - component: {fileID: 4771599482890012711}
   m_Layer: 0
-  m_Name: AoeLightParticle
+  m_Name: AoeFireParticle 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4906,7 +4906,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9e54b4d45e528434d862a3913de72aef, type: 2}
+  - {fileID: 2100000, guid: 029d27cdb0784d44da8fb9bad4e94e56, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

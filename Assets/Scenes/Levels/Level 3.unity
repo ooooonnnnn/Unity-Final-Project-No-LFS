@@ -1849,7 +1849,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelManager
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4847676302259368653, guid: c9acb1bddb4906d428caceed8d270335, type: 3}
+    - {fileID: 8356905618636194069, guid: c9acb1bddb4906d428caceed8d270335, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

@@ -1637,6 +1637,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2564872608182263922, guid: 2193e3145aace374da2ce4ac7aa62687, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3970066647650576690, guid: 2193e3145aace374da2ce4ac7aa62687, type: 3}
       propertyPath: m_UiScaleMode
       value: 1
@@ -1653,6 +1657,10 @@ PrefabInstance:
       propertyPath: m_ReferenceResolution.y
       value: 1080
       objectReference: {fileID: 0}
+    - target: {fileID: 3983043501604239101, guid: 2193e3145aace374da2ce4ac7aa62687, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -1555449580628691896, guid: e298254f0876c4842a7c3bf70a03d266, type: 2}
     - target: {fileID: 4126314450776423054, guid: 2193e3145aace374da2ce4ac7aa62687, type: 3}
       propertyPath: m_PixelPerfect
       value: 0
@@ -1701,11 +1709,28 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7214688917591912161, guid: 2193e3145aace374da2ce4ac7aa62687, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1643680750}
+    - target: {fileID: 7214688917591912161, guid: 2193e3145aace374da2ce4ac7aa62687, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReturnToLevelSelect
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214688917591912161, guid: 2193e3145aace374da2ce4ac7aa62687, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Level.LevelCompleteUI, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 8426813366947429905, guid: 2193e3145aace374da2ce4ac7aa62687, type: 3}
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 9051508289420559149, guid: 2193e3145aace374da2ce4ac7aa62687, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -1555449580628691896, guid: e298254f0876c4842a7c3bf70a03d266, type: 2}
+    m_RemovedComponents:
+    - {fileID: 2675693612677180711, guid: 2193e3145aace374da2ce4ac7aa62687, type: 3}
     m_RemovedGameObjects:
     - {fileID: 2264926372737574794, guid: 2193e3145aace374da2ce4ac7aa62687, type: 3}
     - {fileID: 3087696245592986215, guid: 2193e3145aace374da2ce4ac7aa62687, type: 3}
@@ -1713,7 +1738,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7945739972918509546, guid: 2193e3145aace374da2ce4ac7aa62687, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1088612670}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8727950277215149458, guid: 2193e3145aace374da2ce4ac7aa62687, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1643680750}
   m_SourcePrefab: {fileID: 100100000, guid: 2193e3145aace374da2ce4ac7aa62687, type: 3}
 --- !u!114 &1643680746 stripped
 MonoBehaviour:
@@ -1736,6 +1764,23 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7945739972918509546, guid: 2193e3145aace374da2ce4ac7aa62687, type: 3}
   m_PrefabInstance: {fileID: 1643680745}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1643680749 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8727950277215149458, guid: 2193e3145aace374da2ce4ac7aa62687, type: 3}
+  m_PrefabInstance: {fileID: 1643680745}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1643680750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1643680749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffb5392e9b3cd054d896a360f4625139, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelCompleteUI
 --- !u!1 &1756764652
 GameObject:
   m_ObjectHideFlags: 0

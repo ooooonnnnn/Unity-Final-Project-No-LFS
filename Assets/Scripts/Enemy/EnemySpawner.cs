@@ -163,5 +163,7 @@ using Random = UnityEngine.Random;
             SaveSystem.UnlockNextLevel(levelIndex);
 
             levelCompleteUI.SetActive(true);
+            
+            Time.timeScale = 0f;
         }
     }

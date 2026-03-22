@@ -17,9 +17,11 @@ public class ProjectileBehavior : SpellBase
         this.target = target;
 
         if (target)
-        {
-            Vector3 dir = (target.position - transform.position).normalized;
+        { Vector3 vector3 = new Vector3(target.localPosition.x, target.localPosition.y + 1, target.localPosition.z);
+            
+            Vector3 dir = (vector3 - transform.position).normalized;
             transform.forward = dir;
+            
         }
     }
     
